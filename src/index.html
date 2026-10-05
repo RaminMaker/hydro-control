@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <title>Hydro Control • Smart Pump Control Center</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071018">
+  <meta name="color-scheme" content="dark light">
+  <style>
+    #boot-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 16px;
+      background: #050c12;
+      color: #8da3b0;
+      font: 700 10px/1.4 system-ui, sans-serif;
+      letter-spacing: .12em
+    }
+
+    #boot-splash .boot-logo {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      border: 1px solid rgba(46, 214, 244, .18);
+      background: rgba(46, 214, 244, .05);
+      box-shadow: inset 0 0 30px rgba(46, 214, 244, .07)
+    }
+
+    #boot-splash .boot-logo:before,
+    #boot-splash .boot-logo:after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      inset: 10px;
+      border: 2px solid transparent;
+      border-top-color: #2ed6f4;
+      border-right-color: #2ed6f4;
+      animation: bootSpin .75s linear infinite
+    }
+
+    #boot-splash .boot-logo:after {
+      inset: 20px;
+      border-top-color: #45df9a;
+      border-right-color: #45df9a;
+      animation-direction: reverse;
+      animation-duration: .95s
+    }
+
+    #boot-splash b {
+      color: #e5f1f5;
+      font-size: 13px;
+      letter-spacing: .03em
+    }
+
+    @keyframes bootSpin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    html[data-theme=light] #boot-splash {
+      background: #edf3f6;
+      color: #718792
+    }
+
+    html[data-theme=light] #boot-splash b {
+      color: #19313d
+    }
+  </style>
+  <script>
+    (() => {
+      try {
+        const theme = localStorage.getItem('hydro.control.theme');
+        const language = localStorage.getItem('hydro.control.language') || 'fa';
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+        if (language === 'fa' || language === 'en') {
+          document.documentElement.lang = language;
+          document.documentElement.dir = language === 'fa' ? 'rtl' : 'ltr';
+          document.documentElement.dataset.language = language;
+          window.__HYDRO_CONTROL_LANGUAGE__ = language;
+        }
+      } catch { }
+    })();
+  </script>
+</head>
+
+<body>
+  <app-root>
+    <div id="boot-splash">
+      <div class="boot-logo"></div><b>Hydro Control</b><span id="boot-label">INITIALIZING CONTROL CENTER</span>
+    </div>
+  </app-root>
+  <script>if (window.__HYDRO_CONTROL_LANGUAGE__ === 'fa') document.getElementById('boot-label').textContent = 'در حال راه‌اندازی مرکز کنترل';</script>
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+:host {
+    display: block;
+    min-width: 0
+}
+
+.gauge-card {
+    --gauge-start: #2ed6f4;
+    --gauge-mid: #45df9a;
+    --gauge-end: #efb866;
+    position: relative;
+    min-height: 0;
+    padding: 10px 12px 10px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: linear-gradient(150deg, color-mix(in srgb, var(--panel-bg-solid) 97%, transparent), color-mix(in srgb, var(--surface-soft) 76%, transparent));
+    box-shadow: var(--shadow);
+    overflow: hidden
+}
+
+.gauge-card:after {
+    content: '';
+    position: absolute;
+    right: -50px;
+    bottom: -76px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--gauge-mid) 13%, transparent), transparent 70%);
+    pointer-events: none
+}
+
+.gauge-card.warm {
+    --gauge-start: #62caea;
+    --gauge-mid: #efb866;
+    --gauge-end: #f28b60
+}
+
+.gauge-card.good {
+    --gauge-start: #2ed6f4;
+    --gauge-mid: #45df9a;
+    --gauge-end: #9ae7b9
+}
+
+.gauge-card.warn {
+    --gauge-start: #5ec8e9;
+    --gauge-mid: #efb866;
+    --gauge-end: #ef727a
+}
+
+.gauge-head {
+    display: grid;
+    grid-template-columns: 29px minmax(0, 1fr);
+    align-items: start;
+    gap: 9px;
+    min-height: 33px;
+    position: relative;
+    z-index: 1
+}
+
+.gauge-icon {
+    width: 29px;
+    height: 29px;
+    border-radius: 9px;
+    border: 1px solid color-mix(in srgb, var(--gauge-mid) 22%, var(--line));
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--gauge-mid) 8%, var(--surface-soft));
+    color: var(--gauge-mid);
+    font-size: 17px;
+    line-height: 1
+}
+
+.gauge-copy {
+    min-width: 0
+}
+
+.gauge-label {
+    display: block;
+    font-size: 10px;
+    line-height: 1.5;
+    font-weight: 800;
+    color: var(--muted-strong)
+}
+
+.gauge-copy small {
+    display: block;
+    margin-top: 4px;
+    font-size: 8px;
+    line-height: 1.5;
+    color: var(--muted)
+}
+
+.dial-area {
+    height: 117px;
+    display: grid;
+    place-items: center;
+    margin: 1px auto 0;
+    position: relative;
+    z-index: 1
+}
+
+.dial {
+    display: block;
+    width: min(100%, 275px);
+    height: 117px;
+    overflow: hidden
+}
+
+.arc-base,
+.arc-value {
+    fill: none;
+    stroke-width: 11;
+    stroke-linecap: round
+}
+
+.arc-base {
+    stroke: color-mix(in srgb, var(--line-strong) 84%, transparent)
+}
+
+.arc-value {
+    transition: stroke-dasharray .35s ease
+}
+
+.tick {
+    stroke: color-mix(in srgb, var(--muted-strong) 52%, transparent);
+    stroke-width: 1.5
+}
+
+.needle-shadow {
+    stroke: rgba(0, 0, 0, .34);
+    stroke-width: 8;
+    stroke-linecap: round
+}
+
+.needle {
+    stroke: var(--text-strong);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: x2 .28s ease, y2 .28s ease
+}
+
+.needle-point {
+    fill: var(--text-strong);
+    transition: cx .28s ease, cy .28s ease
+}
+
+.hub-ring {
+    fill: var(--panel-bg-solid);
+    stroke: var(--gauge-mid);
+    stroke-width: 3
+}
+
+.hub {
+    fill: var(--text-strong)
+}
+
+.min-label,
+.max-label {
+    fill: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    direction: ltr;
+    unicode-bidi: plaintext
+}
+
+.max-label {
+    text-anchor: end
+}
+
+.reading {
+    position: relative;
+    z-index: 2;
+    width: max-content;
+    max-width: calc(100% - 20px);
+    min-width: 106px;
+    margin: 0 auto 0;
+    padding: 5px 10px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: color-mix(in srgb, var(--panel-bg-solid) 92%, transparent);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    direction: ltr;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .10)
+}
+
+.reading strong {
+    font-size: 23px;
+    line-height: 1;
+    font-weight: 850;
+    letter-spacing: -.045em;
+    color: var(--text-strong);
+    font-variant-numeric: tabular-nums
+}
+
+.reading span {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--muted-strong);
+    white-space: nowrap
+}
+
+@media(max-width:760px) {
+    .gauge-card {
+        padding: 10px
+    }
+
+    .dial-area,
+    .dial {
+        height: 114px
+    }
+
+    .reading strong {
+        font-size: 23px
+    }
+}
+
+@media(max-width:460px) {
+
+    .dial-area,
+    .dial {
+        height: 110px
+    }
+
+    .reading {
+        min-width: 100px
+    }
+
+    .reading strong {
+        font-size: 22px
+    }
+}
+
+:host-context(html[dir='rtl']) .gauge-card,
+:host-context(html[dir='rtl']) .dial text {
+    font-family: 'Vazir', Tahoma, Arial, sans-serif
+}

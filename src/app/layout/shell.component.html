@@ -1,0 +1,156 @@
+<div class="app-shell" [class.sidebar-collapsed]="sidebarCollapsed()">
+  <aside class="sidebar" id="hydro-sidebar" [attr.aria-expanded]="!sidebarCollapsed()">
+    <div class="sidebar-top">
+      <a class="brand" routerLink="/dashboard" [attr.aria-label]="i18n.t('nav.overview')">
+        <span class="brand-mark"><span></span></span>
+        <span class="brand-copy sidebar-copy"><strong>{{ i18n.t('brand.name') }}</strong><small>{{
+            i18n.t('brand.subtitle') }}</small></span>
+      </a>
+
+      <button class="sidebar-toggle" type="button" (click)="toggleSidebar()"
+        [attr.aria-label]="sidebarCollapsed() ? i18n.t('sidebar.expand') : i18n.t('sidebar.collapse')"
+        [attr.title]="sidebarCollapsed() ? i18n.t('sidebar.expand') : i18n.t('sidebar.collapse')">
+        <svg class="rail-icon" [class.collapsed]="sidebarCollapsed()" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="m14 6-6 6 6 6" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="nav-list">
+      <a routerLink="/dashboard" routerLinkActive="active" [attr.data-tooltip]="i18n.t('nav.overview')"><span
+          class="nav-icon"><svg class="nav-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
+          </svg></span><span class="nav-label sidebar-copy">{{ i18n.t('nav.overview') }}</span></a>
+      <a routerLink="/analytics" routerLinkActive="active" [attr.data-tooltip]="i18n.t('nav.analytics')"><span
+          class="nav-icon"><svg class="nav-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 16 9 10l4 3 8-8" />
+            <path d="M15 5h6v6" />
+            <path d="M3 21h18" />
+          </svg></span><span class="nav-label sidebar-copy">{{ i18n.t('nav.analytics') }}</span></a>
+      <a routerLink="/heating" routerLinkActive="active" [attr.data-tooltip]="i18n.t('nav.heating')"><span
+          class="nav-icon"><svg class="nav-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 3c-4 5 4 5 0 10M12 3c-4 5 4 5 0 10M17 3c-4 5 4 5 0 10" />
+            <path d="M4 17h16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2Z" />
+          </svg></span><span class="nav-label sidebar-copy">{{ i18n.t('nav.heating') }}</span></a>
+      <a routerLink="/alarms" routerLinkActive="active" [attr.data-tooltip]="i18n.t('nav.alarms')"><span
+          class="nav-icon"><svg class="nav-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10.3 4.7 2.8 18a1.5 1.5 0 0 0 1.3 2.2h15.8a1.5 1.5 0 0 0 1.3-2.2L13.7 4.7a2 2 0 0 0-3.4 0Z" />
+            <path d="M12 9v5m0 3h.01" />
+          </svg></span><span class="nav-label sidebar-copy">{{ i18n.t('nav.alarms') }}</span></a>
+      <a routerLink="/settings" routerLinkActive="active" [attr.data-tooltip]="i18n.t('nav.system')"><span
+          class="nav-icon"><svg class="nav-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path
+              d="M9.8 3.5h4.4l.6 2.3 2 .9 2.1-1.2L22 9l-1.8 1.7.1 2.4L22 15l-3.1 3.5-2.1-1.2-2 .9-.6 2.3H9.8l-.6-2.3-2-.9-2.1 1.2L2 15l1.8-1.9-.1-2.4L2 9l3.1-3.5 2.1 1.2 2-.9z" />
+            <circle cx="12" cy="12" r="2.6" />
+          </svg></span><span class="nav-label sidebar-copy">{{ i18n.t('nav.system') }}</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="plant-card" [attr.data-tooltip]="i18n.t('gateway.title')">
+        <span class="plant-compact status-dot" [class.online]="pump.isOnline()"
+          [class.offline]="!pump.isOnline()"></span>
+        <div class="plant-copy sidebar-copy">
+          <span class="eyebrow">{{ i18n.t('gateway.title') }}</span>
+          <div class="plant-row"><span class="status-dot" [class.online]="pump.isOnline()"
+              [class.offline]="!pump.isOnline()"></span><strong>{{ i18n.t('gateway.node') }}</strong></div>
+          <small>WebSocket · localhost:8081</small>
+        </div>
+      </div>
+
+      <div class="profile">
+        <span class="avatar">AD</span>
+        <span class="profile-copy sidebar-copy"><strong>{{ auth.user()?.username === 'admin' ?
+            i18n.t('profile.adminName') : (auth.user()?.displayName || i18n.t('profile.adminName')) }}</strong><small>{{
+            i18n.t('profile.role') }}</small></span>
+        <button type="button" class="logout sidebar-copy-action" (click)="logout()"
+          [attr.aria-label]="i18n.t('profile.logout')" [attr.title]="i18n.t('profile.logout')">↪</button>
+      </div>
+    </div>
+  </aside>
+  <main class="workspace">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="title-block">
+          <span class="eyebrow">{{ i18n.t('header.eyebrow') }}</span>
+          <h1>{{ i18n.t('header.title') }}</h1>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="connection-pill" [attr.data-state]="pump.isOnline() ? 'online' : 'offline'" role="status"
+          aria-live="polite">
+          <span class="signal-beacon" [class.online]="pump.isOnline()" [class.offline]="!pump.isOnline()"></span>
+          <strong>{{ i18n.t('connection.' + pump.connection()) }}</strong>
+        </div>
+        <span class="live-clock">{{ i18n.t('header.live') }}</span>
+        <p-selectbutton class="language-select" [options]="languageOptions" optionLabel="label" optionValue="value"
+          [allowEmpty]="false" [ngModel]="i18n.language()" (ngModelChange)="i18n.setLanguage($event)" />
+        <p-button class="theme-switch" [icon]="theme.theme() === 'dark' ? 'pi pi-sun' : 'pi pi-moon'" [text]="true"
+          [rounded]="true" size="small" (onClick)="theme.toggle()" [attr.aria-label]="i18n.t('header.theme')" />
+        <p-button class="quick-logout" [text]="true" size="small" icon="pi pi-sign-out" (onClick)="logout()"
+          [attr.aria-label]="i18n.t('profile.logout')" />
+      </div>
+    </header>
+
+    @if (burnerBanner()) {
+    <section class="top-alert" role="status" aria-live="polite">
+      <span class="top-alert-icon flame-animated" aria-hidden="true"><span>🔥</span></span>
+      <div class="top-alert-copy">
+        <strong>{{ i18n.t('header.burnerBanner') }}</strong>
+        <small>{{ i18n.t('header.burnerBannerText') }}</small>
+      </div>
+    </section>
+    }
+
+    <section class="route-stage">
+      <router-outlet />
+      @if (routeFailed()) {
+      <div class="route-error" role="alert">
+        <i class="pi pi-exclamation-triangle"></i>
+        <strong>{{ i18n.t('navigation.failed') }}</strong>
+        <button type="button" (click)="reloadPage()">{{ i18n.t('navigation.retry') }}</button>
+      </div>
+      }
+    </section>
+
+  </main>
+</div>
+<nav class="mobile-nav" [attr.aria-label]="i18n.t('navigation.mobile')">
+  <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><span
+      class="mobile-nav-icon"><svg class="nav-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
+      </svg></span><small>{{ i18n.t('nav.overview') }}</small></a>
+  <a routerLink="/analytics" routerLinkActive="active"><span class="mobile-nav-icon"><svg class="nav-symbol"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 16 9 10l4 3 8-8" />
+        <path d="M15 5h6v6" />
+        <path d="M3 21h18" />
+      </svg></span><small>{{ i18n.t('nav.analytics') }}</small></a>
+  <a routerLink="/heating" routerLinkActive="active"><span class="mobile-nav-icon"><svg class="nav-symbol"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 3c-4 5 4 5 0 10M12 3c-4 5 4 5 0 10M17 3c-4 5 4 5 0 10" />
+        <path d="M4 17h16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2Z" />
+      </svg></span><small>{{ i18n.t('nav.heating') }}</small></a>
+  <a routerLink="/alarms" routerLinkActive="active"><span class="mobile-nav-icon"><svg class="nav-symbol"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path d="M10.3 4.7 2.8 18a1.5 1.5 0 0 0 1.3 2.2h15.8a1.5 1.5 0 0 0 1.3-2.2L13.7 4.7a2 2 0 0 0-3.4 0Z" />
+        <path d="M12 9v5m0 3h.01" />
+      </svg></span><small>{{ i18n.t('nav.alarms') }}</small></a>
+  <a routerLink="/settings" routerLinkActive="active"><span class="mobile-nav-icon"><svg class="nav-symbol"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path
+          d="M9.8 3.5h4.4l.6 2.3 2 .9 2.1-1.2L22 9l-1.8 1.7.1 2.4L22 15l-3.1 3.5-2.1-1.2-2 .9-.6 2.3H9.8l-.6-2.3-2-.9-2.1 1.2L2 15l1.8-1.9-.1-2.4L2 9l3.1-3.5 2.1 1.2 2-.9z" />
+        <circle cx="12" cy="12" r="2.6" />
+      </svg></span><small>{{ i18n.t('nav.system') }}</small></a>
+</nav>

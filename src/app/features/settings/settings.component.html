@@ -1,0 +1,16 @@
+<section class="page-head"><span class="eyebrow">{{ i18n.t('settings.eyebrow') }}</span>
+  <h2>{{ i18n.t('settings.title') }}</h2>
+  <p>{{ i18n.t('settings.subtitle') }}</p>
+</section>
+<div class="settings-grid">
+  <p-card styleClass="settings-prime-card"><span class="eyebrow">{{ i18n.t('settings.connection') }}</span>
+    <h3>{{ i18n.t('settings.gateway') }}</h3><label>{{ i18n.t('settings.wsEndpoint') }}<input pInputText
+        value="ws://localhost:8081" readonly></label><label>{{ i18n.t('settings.reconnect') }}<input pInputText
+        [value]="i18n.t('settings.reconnectValue')" readonly></label>
+  </p-card>
+  <p-card styleClass="settings-prime-card"><span class="eyebrow">{{ i18n.t('settings.asset') }}</span>
+    <h3>{{ i18n.t('settings.pump') }}</h3><label>{{ i18n.t('settings.ratedFlow') }}<input pInputText value="28 L/min"
+        readonly></label><label>{{ i18n.t('settings.ratedSpeed') }}<input pInputText value="2850 RPM" readonly></label>
+  </p-card>
+
+</div>

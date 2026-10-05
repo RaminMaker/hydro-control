@@ -1,0 +1,100 @@
+<div class="control-shell">
+  <div class="control-head">
+    <div class="title-stack">
+      <span class="eyebrow">{{ i18n.t('control.remote') }}</span>
+      <div class="title-line">
+        <h3>{{ i18n.t('control.title') }}</h3>
+        <span class="state-chip" [class.running]="telemetry.pumpRunning" [class.stopped]="!telemetry.pumpRunning">
+          <i class="state-beacon"></i>
+          {{ telemetry.pumpRunning ? i18n.t('control.running') : i18n.t('control.stopped') }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">{{ i18n.t('control.title') }}</div>
+    <p-selectbutton class="mode-grid" [options]="modeOptions()" optionLabel="label" optionValue="value"
+      [ngModel]="telemetry.mode" (ngModelChange)="setMode($event)" [allowEmpty]="false" />
+
+    <label class="range-row">
+      <span><span>{{ i18n.t('control.pressureSetpoint') }}</span><strong>{{ telemetry.targetPressureBar.toFixed(1) }}
+          bar</strong></span>
+      <p-slider [min]="1.5" [max]="5.5" [step]="0.1" [ngModel]="telemetry.targetPressureBar"
+        (ngModelChange)="setPressureValue($event)" />
+    </label>
+
+    <label class="range-row no-border">
+      <span><span>{{ i18n.t('control.outletValve') }}</span><strong>{{ telemetry.valvePct.toFixed(0) }}%</strong></span>
+      <p-slider [min]="10" [max]="100" [step]="1" [ngModel]="telemetry.valvePct"
+        (ngModelChange)="setValveValue($event)" />
+    </label>
+
+    <div class="control-actions">
+      <p-button icon="pi pi-play" severity="success" size="small" [label]="i18n.t('control.start')"
+        (onClick)="emit({type:'START'})" [disabled]="telemetry.pumpRunning" />
+      <p-button icon="pi pi-stop" severity="danger" size="small" [outlined]="true" [label]="i18n.t('control.stop')"
+        (onClick)="emit({type:'STOP'})" [disabled]="!telemetry.pumpRunning" />
+    </div>
+  </div>
+
+  <div class="section-card boiler-card">
+    <div class="section-top switch-row">
+      <div class="switch-copy">
+        <div class="section-title">{{ i18n.t('control.boilerPackage') }}</div>
+        <small>{{ telemetry.boilerEnabled ? i18n.t('heating.on') : i18n.t('control.off') }}</small>
+      </div>
+      <p-toggleswitch [ngModel]="telemetry.boilerEnabled"
+        (ngModelChange)="emit({type:'SET_BOILER_ENABLED', value: $event})"
+        [attr.aria-label]="i18n.t('control.boilerSwitch')" />
+    </div>
+
+    <div class="mini-stats">
+      <span><small>{{ i18n.t('dashboard.burner') }}</small><strong>{{ telemetry.burnerOn ? i18n.t('heating.on') :
+          i18n.t('heating.off') }}</strong></span>
+      <span><small>{{ i18n.t('dashboard.boilerSupply') }}</small><strong>{{ telemetry.boilerSupplyC.toFixed(1)
+          }}°C</strong></span>
+    </div>
+
+    <label class="range-row">
+      <span><span>{{ i18n.t('control.radiatorLoopValve') }}</span><strong>{{ telemetry.radiatorValvePct.toFixed(0)
+          }}%</strong></span>
+      <p-slider [min]="0" [max]="100" [step]="1" [ngModel]="telemetry.radiatorValvePct"
+        (ngModelChange)="setRadiatorValveValue($event)" />
+    </label>
+
+    <div class="loop-actions">
+      <p-button size="small" [outlined]="true" [label]="i18n.t('control.open')"
+        (onClick)="emit({ type: 'SET_RADIATOR_VALVE', value: 100 })" />
+      <p-button size="small" [outlined]="true" severity="danger" [label]="i18n.t('control.close')"
+        (onClick)="emit({ type: 'SET_RADIATOR_VALVE', value: 0 })" />
+    </div>
+  </div>
+
+  <div class="section-card zones-card">
+    <div class="section-top zones-head">
+      <div>
+        <div class="section-title">{{ i18n.t('control.zoneValves') }}</div>
+        <small>{{ i18n.t('heating.roomDistributionText') }}</small>
+      </div>
+    </div>
+    <div class="zone-valves">
+      @for (value of telemetry.radiatorValvePcts; track $index; let i = $index) {
+      <div class="zone-row">
+        <span class="zone-name">{{ i18n.t('heating.radiator') }} {{ i + 1 }}</span>
+        <strong class="zone-value">{{ value.toFixed(0) }}%</strong>
+        <p-slider class="zone-slider" [min]="0" [max]="100" [step]="1" [ngModel]="value"
+          (ngModelChange)="setZoneValveValue(i, $event)" />
+        <p-button size="small" [text]="true" [severity]="value === 0 ? 'success' : 'secondary'"
+          [label]="value === 0 ? i18n.t('control.open') : i18n.t('control.close')" (onClick)="toggleZoneValve(i)" />
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="section-card fault-card">
+    <div class="section-title">{{ i18n.t('control.faultSimulation') }}</div>
+    <p-selectbutton class="fault-grid" [options]="faultOptions()" optionLabel="label" optionValue="value"
+      [ngModel]="telemetry.heatingFaultMode" (ngModelChange)="setFault($event)" [allowEmpty]="false" />
+  </div>
+</div>

@@ -1,0 +1,566 @@
+.control-shell .p-selectbutton {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 6px
+}
+
+.control-shell .p-selectbutton .p-togglebutton {
+    flex: 1;
+    min-width: 64px
+}
+
+.control-shell p-slider {
+    display: block;
+    width: 100%;
+    margin-top: 13px;
+    margin-bottom: 9px;
+    min-width: 0
+}
+
+.control-actions p-button,
+.loop-actions p-button {
+    width: 100%
+}
+
+.fault-grid .p-selectbutton {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px
+}
+
+.zone-row p-slider {
+    width: 100%;
+    min-width: 0;
+    display: block
+}
+
+
+:host {
+    display: block;
+    min-width: 0;
+    container-type: inline-size
+}
+
+.control-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    min-width: 0
+}
+
+.control-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0
+}
+
+.control-head h3 {
+    font-size: 14px;
+    margin: 4px 0 0
+}
+
+.eyebrow,
+.section-title {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: .06em
+}
+
+.state {
+    padding: 6px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(241, 121, 128, .2);
+    background: rgba(241, 121, 128, .05);
+    color: var(--danger);
+    font-size: 10px;
+    white-space: nowrap
+}
+
+.state.running {
+    color: var(--green);
+    border-color: var(--green-border);
+    background: rgba(69, 223, 154, .06)
+}
+
+.section-card {
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-soft)
+}
+
+.section-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    min-width: 0
+}
+
+.section-top>div {
+    min-width: 0
+}
+
+.section-top small {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--muted-strong)
+}
+
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 9px
+}
+
+.mode-grid button,
+.loop-actions button,
+.fault-grid button {
+    min-width: 0;
+    min-height: 30px;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface-input);
+    color: var(--muted-strong);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35
+}
+
+.mode-grid button.active,
+.fault-grid button.active {
+    background: var(--accent-soft-strong);
+    color: var(--accent-text);
+    border-color: var(--accent-border)
+}
+
+.range-row {
+    display: block;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+    margin-top: 9px
+}
+
+.range-row.no-border {
+    padding-bottom: 0
+}
+
+.range-row>span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--muted-strong)
+}
+
+.range-row strong {
+    font-size: 11px;
+    white-space: nowrap;
+    color: var(--text-strong);
+    direction: ltr
+}
+
+.range-row input,
+.zone-slider {
+    display: block;
+    width: 100%;
+    margin-top: 7px;
+    accent-color: var(--cyan)
+}
+
+.control-actions,
+.loop-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px
+}
+
+.control-actions button {
+    min-height: 34px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 750;
+    padding: 6px 10px
+}
+
+.control-actions button:disabled {
+    cursor: not-allowed;
+    opacity: .35
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #37d6ef, #35d997);
+    color: #051219
+}
+
+.btn-stop,
+.danger-outline {
+    border: 1px solid rgba(241, 121, 128, .22) !important;
+    background: rgba(241, 121, 128, .06) !important;
+    color: var(--danger) !important
+}
+
+.boiler-card {
+    position: relative;
+    overflow: hidden
+}
+
+.switch-row {
+    justify-content: flex-start;
+    gap: 16px;
+    min-height: 34px
+}
+
+.switch-copy {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+    flex: 0 1 auto
+}
+
+.boiler-switch {
+    position: relative;
+    direction: ltr;
+    display: block;
+    box-sizing: border-box;
+    width: 56px;
+    height: 30px;
+    min-width: 56px;
+    max-width: 56px;
+    flex: 0 0 56px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--surface-input);
+    transition: background .18s ease, border-color .18s ease
+}
+
+.boiler-switch.on {
+    background: rgba(46, 214, 244, .13);
+    border-color: rgba(46, 214, 244, .4)
+}
+
+.boiler-switch-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    display: block;
+    border-radius: 50%;
+    background: #91a4b0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .24);
+    transition: left .18s ease, background .18s ease;
+    pointer-events: none
+}
+
+.boiler-switch.on .boiler-switch-thumb {
+    left: 29px;
+    background: linear-gradient(145deg, #4ed9ee, #55dab0)
+}
+
+.mini-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 9px
+}
+
+.mini-stats>span {
+    display: block;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface-soft)
+}
+
+.mini-stats small {
+    display: block;
+    font-size: 9px;
+    color: var(--muted)
+}
+
+.mini-stats strong {
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    color: var(--text-strong);
+    overflow-wrap: anywhere
+}
+
+.zones-head {
+    align-items: start
+}
+
+.zone-valves {
+    display: grid;
+    gap: 6px;
+    margin-top: 9px
+}
+
+.zone-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 50px;
+    grid-template-areas: 'name value' 'slider action';
+    align-items: center;
+    gap: 6px 10px;
+    min-width: 0;
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-soft)
+}
+
+.zone-name {
+    grid-area: name;
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--muted-strong)
+}
+
+.zone-value {
+    grid-area: value;
+    text-align: end;
+    font-size: 10px;
+    direction: ltr;
+    color: var(--text-strong)
+}
+
+.zone-slider {
+    grid-area: slider;
+    margin: 0
+}
+
+.zone-action {
+    grid-area: action;
+    min-width: 50px;
+    min-height: 26px;
+    padding: 4px 7px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--surface-input);
+    color: var(--muted-strong);
+    font-size: 9px;
+    font-weight: 700
+}
+
+.zone-action.closed {
+    color: var(--green);
+    border-color: var(--green-border)
+}
+
+.fault-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 9px
+}
+
+@container (min-width:600px) {
+    .control-shell {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start
+    }
+
+    .control-head {
+        grid-column: 1/-1
+    }
+}
+
+@container (min-width:1130px) {
+    .control-shell {
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+    }
+}
+
+@container (max-width:370px) {
+    .mode-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+    }
+
+    .fault-grid {
+        grid-template-columns: 1fr
+    }
+
+    .control-actions button {
+        font-size: 9px
+    }
+
+    .section-card {
+        padding: 11px
+    }
+}
+
+:host {
+    display: block;
+    min-width: 0;
+    container-type: inline-size
+}
+
+.control-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px
+}
+
+.section-card {
+    min-width: 0;
+    padding: 13px;
+    border-radius: 12px
+}
+
+.section-title {
+    font-size: 11px;
+    line-height: 1.5
+}
+
+.control-head {
+    gap: 10px
+}
+
+.control-head h3 {
+    font-size: 14px;
+    line-height: 1.45
+}
+
+.range-row>span {
+    font-size: 11px
+}
+
+.range-row strong,
+.mini-stats strong {
+    font-variant-numeric: tabular-nums
+}
+
+.zone-row {
+    grid-template-columns: minmax(0, 1fr) 58px;
+    gap: 8px
+}
+
+.zone-name {
+    font-size: 11px;
+    line-height: 1.5
+}
+
+.zone-value {
+    font-size: 11px
+}
+
+.switch-row {
+    justify-content: space-between;
+    align-items: center
+}
+
+@container (min-width:680px) {
+    .control-shell {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .control-head {
+        grid-column: 1/-1
+    }
+}
+
+@container (min-width:1130px) {
+    .control-shell {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+}
+
+@container (max-width:440px) {
+    .control-shell {
+        grid-template-columns: 1fr
+    }
+
+    .section-card {
+        padding: 11px
+    }
+
+    .control-head {
+        align-items: flex-start
+    }
+}
+
+
+.title-stack {
+    display: grid;
+    gap: 4px;
+    min-width: 0
+}
+
+.title-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-width: 0
+}
+
+.state-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(241, 121, 128, .24);
+    background: rgba(241, 121, 128, .06);
+    color: var(--danger);
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap
+}
+
+.state-chip.running {
+    border-color: var(--green-border);
+    background: rgba(69, 223, 154, .09);
+    color: var(--green)
+}
+
+.state-beacon {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    display: inline-block;
+    box-shadow: 0 0 0 0 currentColor;
+    animation: panelStatePulse 1.55s ease-out infinite
+}
+
+@keyframes panelStatePulse {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent)
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px color-mix(in srgb, currentColor 0%, transparent)
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 0%, transparent)
+    }
+}
+
+.section-top small,
+.switch-copy small {
+    font-family: inherit
+}

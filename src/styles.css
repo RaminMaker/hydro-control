@@ -1,0 +1,371 @@
+@import 'primeicons/primeicons.css';
+@import './styles/vazir.css';
+@import './styles/primeng-bridge.css';
+
+:root {
+  --bg: #050c12;
+  --workspace-bg: radial-gradient(circle at 72% -10%, rgba(31, 116, 139, .10), transparent 35%), #050c12;
+  --sidebar-bg: linear-gradient(180deg, rgba(8, 17, 25, .985), rgba(5, 12, 18, .97));
+  --sidebar-shadow: none;
+  --topbar-bg: rgba(6, 14, 21, .72);
+  --panel-bg: linear-gradient(145deg, rgba(13, 28, 39, .82), rgba(7, 16, 24, .94));
+  --panel-bg-solid: #0a161f;
+  --surface-soft: rgba(255, 255, 255, .025);
+  --surface-hover: rgba(255, 255, 255, .04);
+  --surface-input: #08131b;
+  --surface-elevated: #0d1c27;
+  --line: rgba(116, 157, 176, .105);
+  --line-strong: rgba(116, 157, 176, .18);
+  --text: #e5f1f5;
+  --text-strong: #f0fbff;
+  --muted: #677f8d;
+  --muted-strong: #8da3b0;
+  --nav-text: #8194a5;
+  --cyan: #2ed6f4;
+  --accent-text: #9feeff;
+  --accent-border: rgba(46, 214, 244, .18);
+  --accent-soft: linear-gradient(145deg, rgba(45, 211, 255, .16), rgba(45, 211, 255, .03));
+  --accent-soft-strong: rgba(46, 214, 244, .12);
+  --accent-glow: rgba(45, 211, 255, .08);
+  --nav-active: linear-gradient(90deg, rgba(32, 212, 245, .12), rgba(32, 212, 245, .025));
+  --green: #45df9a;
+  --green-border: rgba(76, 218, 147, .2);
+  --green-glow: rgba(69, 224, 154, .65);
+  --amber: #efb866;
+  --danger: #f17980;
+  --avatar-bg: #112631;
+  --avatar-line: #1c3a48;
+  --shadow: 0 14px 45px rgba(0, 0, 0, .17), inset 0 1px rgba(255, 255, 255, .018);
+  --button-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+  --chart-grid: rgba(120, 160, 178, .10);
+  --scene-bg-1: rgba(30, 74, 91, .20);
+  --scene-bg-2: #07131c;
+  --scene-bg-3: #050d13;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-synthesis: none;
+}
+
+html[data-theme='light'] {
+  --bg: #edf3f6;
+  --workspace-bg: radial-gradient(circle at 72% -10%, rgba(19, 169, 199, .10), transparent 35%), #edf3f6;
+  --sidebar-bg: linear-gradient(180deg, rgba(250, 253, 254, .99), rgba(242, 248, 250, .985));
+  --sidebar-shadow: 12px 0 38px rgba(26, 67, 84, .045);
+  --topbar-bg: rgba(248, 252, 253, .82);
+  --panel-bg: linear-gradient(145deg, rgba(255, 255, 255, .95), rgba(245, 250, 252, .96));
+  --panel-bg-solid: #ffffff;
+  --surface-soft: rgba(20, 72, 91, .035);
+  --surface-hover: rgba(15, 133, 159, .055);
+  --surface-input: #f4f8fa;
+  --surface-elevated: #ffffff;
+  --line: rgba(57, 101, 119, .14);
+  --line-strong: rgba(57, 101, 119, .22);
+  --text: #19313d;
+  --text-strong: #0e2732;
+  --muted: #718792;
+  --muted-strong: #536b77;
+  --nav-text: #607986;
+  --cyan: #079fc0;
+  --accent-text: #067f9b;
+  --accent-border: rgba(7, 159, 192, .20);
+  --accent-soft: linear-gradient(145deg, rgba(7, 159, 192, .10), rgba(7, 159, 192, .025));
+  --accent-soft-strong: rgba(7, 159, 192, .10);
+  --accent-glow: rgba(7, 159, 192, .08);
+  --nav-active: linear-gradient(90deg, rgba(7, 159, 192, .10), rgba(7, 159, 192, .018));
+  --green: #169766;
+  --green-border: rgba(22, 151, 102, .20);
+  --green-glow: rgba(22, 151, 102, .32);
+  --amber: #ba7920;
+  --danger: #c94d57;
+  --avatar-bg: #e5f3f7;
+  --avatar-line: #c9e2e9;
+  --shadow: 0 16px 42px rgba(45, 78, 92, .08), inset 0 1px rgba(255, 255, 255, .8);
+  --button-shadow: 0 4px 14px rgba(36, 70, 84, .08);
+  --chart-grid: rgba(63, 101, 117, .12);
+  --scene-bg-1: rgba(42, 157, 182, .16);
+  --scene-bg-2: #dbeaf0;
+  --scene-bg-3: #cfdfe6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--workspace-bg);
+  color: var(--text);
+  transition: background .25s ease, color .25s ease
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden
+}
+
+html[dir='rtl'] body,
+html[dir='rtl'] button,
+html[dir='rtl'] input,
+html[dir='rtl'] textarea,
+html[dir='rtl'] select {
+  font-family: 'Vazir', Tahoma, 'Segoe UI', Arial, sans-serif
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit
+}
+
+input,
+textarea,
+select {
+  min-width: 0
+}
+
+input:not([type='range']):not(.p-inputtext):not(.p-password-input) {
+  background: var(--surface-input);
+  color: var(--text);
+  border-color: var(--line)
+}
+
+a {
+  color: inherit
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible,
+select:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--cyan) 75%, transparent);
+  outline-offset: 2px
+}
+
+::selection {
+  background: color-mix(in srgb, var(--cyan) 24%, transparent)
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-input)
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted) 46%, transparent);
+  border-radius: 8px
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%
+}
+
+app-shell,
+app-dashboard,
+app-heating,
+app-analytics,
+app-alarms,
+app-settings {
+  display: block;
+  min-width: 0
+}
+
+.panel,
+.metric-card,
+.section-card,
+.room,
+.radiator,
+.event-row {
+  min-width: 0;
+  max-width: 100%
+}
+
+.panel {
+  color: var(--text);
+  min-width: 0;
+  max-width: 100%
+}
+
+html[data-theme='light'] .event-row,
+html[data-theme='light'] .alarm-row {
+  background: rgba(27, 78, 96, .025);
+  color: var(--text)
+}
+
+html[data-theme='light'] .tank-visual {
+  background: linear-gradient(90deg, rgba(14, 105, 135, .035), transparent 38%, rgba(14, 105, 135, .04))
+}
+
+html[data-theme='light'] .scene-badge,
+html[data-theme='light'] .scene-toolbar button {
+  background: rgba(250, 253, 254, .86)
+}
+
+html[dir='rtl'] .alarm-row,
+html[dir='rtl'] .event-row {
+  text-align: right
+}
+
+html[dir='rtl'] .range-row>span,
+html[dir='rtl'] .panel-head,
+html[dir='rtl'] .control-head,
+html[dir='rtl'] .page-head {
+  direction: rtl
+}
+
+
+router-outlet+* {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  animation: routeFade .18s ease-out
+}
+
+@keyframes routeFade {
+  from {
+    opacity: .65
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important
+  }
+}
+
+@media(max-width:700px) {
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+    font-size: 14px
+  }
+}
+
+
+html[lang='fa'],
+html[dir='rtl'],
+html[lang='fa'] body,
+html[dir='rtl'] body,
+html[lang='fa'] button,
+html[lang='fa'] input,
+html[lang='fa'] textarea,
+html[lang='fa'] select,
+html[dir='rtl'] .p-component,
+html[dir='rtl'] .p-button,
+html[dir='rtl'] .p-inputtext,
+html[dir='rtl'] .p-togglebutton,
+html[dir='rtl'] .p-tag,
+html[dir='rtl'] .p-datatable,
+html[dir='rtl'] .p-card,
+html[dir='rtl'] .p-message,
+html[dir='rtl'] .p-tooltip,
+html[dir='rtl'] .p-popover {
+  font-family: 'Vazir', Tahoma, Arial, sans-serif !important;
+}
+
+html[dir='rtl'] body {
+  font-size: 13px;
+  line-height: 1.65
+}
+
+html[dir='rtl'] :is(h1, h2, h3, h4, strong, b) {
+  font-family: 'Vazir', Tahoma, Arial, sans-serif
+}
+
+
+html[dir='rtl'] :is(.gauge-card, .panel, .metric-card, .topbar, .sidebar, .route-stage, .p-selectbutton, .p-button, .p-tag, .p-inputtext, .p-component, svg text, small, .eyebrow, .chip, .alarm-count, .connection-pill, .live-clock, .top-alert, .plant-card, .profile-copy) {
+  font-family: 'Vazir', Tahoma, Arial, sans-serif !important
+}
+
+html[dir='rtl'] bdi,
+html[dir='rtl'] .reading,
+html[dir='rtl'] .range-row strong {
+  font-family: 'Vazir', Tahoma, Arial, sans-serif
+}
+
+
+
+html[lang="fa"] body,
+html[lang="fa"] body :not(.pi):not(.pi-icon):not(.material-icons),
+html[dir="rtl"] body,
+html[dir="rtl"] body :not(.pi):not(.pi-icon):not(.material-icons) {
+  font-family: "Vazir", Tahoma, Arial, sans-serif !important;
+}
+
+html[lang="fa"] :is(.p-component, .p-inputtext, .p-selectbutton, .p-togglebutton, .p-button, .p-card, .p-tag, .p-tooltip, .p-chart, .p-datatable, .p-message, .p-panel, .p-dialog) {
+  font-family: "Vazir", Tahoma, Arial, sans-serif !important
+}
+
+html[dir="rtl"] body {
+  font-size: 13px;
+  line-height: 1.8
+}
+
+html[dir="rtl"] :is(.nav-label, .panel-head, .section-title, .topbar h1) {
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .eyebrow {
+  letter-spacing: 0;
+  line-height: 1.7;
+  font-size: max(10px, 0.68rem)
+}
+
+html[dir="rtl"] :is(.p-button, .p-togglebutton, .p-tag, .p-inputtext, .p-datatable td, .p-datatable th) {
+  letter-spacing: 0
+}
+
+@media(max-width:920px) {
+
+  html,
+  body {
+    overflow-x: hidden
+  }
+
+  body {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px)) !important
+  }
+
+  html[dir="rtl"] .mobile-nav small {
+    font-family: "Vazir", Tahoma, Arial, sans-serif !important;
+    line-height: 1.4
+  }
+}
+
+
+html[lang='fa'] {
+  --p-font-family: 'Vazir', Tahoma, Arial, sans-serif;
+  font-family: 'Vazir', Tahoma, Arial, sans-serif;
+}
+
+html[lang='fa'] :is(body, app-root, app-shell, .workspace, .route-stage, .p-component, .p-card, .p-button, .p-togglebutton, .p-inputtext, .p-selectbutton, .p-datatable, .p-tag, .p-tooltip, .p-message, input, textarea, select, button) {
+  font-family: 'Vazir', Tahoma, Arial, sans-serif !important
+}
+
+html[lang='fa'] :is(.pi, [class^='pi-'], [class*=' pi-']) {
+  font-family: 'primeicons' !important
+}
+
+@media(max-width:920px) {
+  body {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important
+  }
+}

@@ -1,0 +1,62 @@
+<main class="login-page">
+  <section class="visual-panel">
+    <div class="brand"><span class="brand-mark"><span></span></span>
+      <div><strong>{{ i18n.t('brand.name') }}</strong><small>{{ i18n.t('brand.subtitle') }}</small></div>
+    </div>
+    <div class="hero-copy">
+      <span class="eyebrow">{{ i18n.t('login.eyebrow') }}</span>
+      <h1>{{ i18n.t('login.heroTitle') }}</h1>
+      <p>{{ i18n.t('login.heroText') }}</p>
+    </div>
+    <div class="system-preview">
+      <div class="preview-node pump"><span>↻</span><small>{{ i18n.t('control.title') }}</small></div>
+      <div class="flow-line l1"><i></i><i></i><i></i></div>
+      <div class="preview-node boiler"><span>♨</span><small>{{ i18n.t('scene.boiler') }}</small></div>
+      <div class="flow-line l2"><i></i><i></i><i></i></div>
+      <div class="preview-node radiator"><span>▥</span><small>{{ i18n.t('scene.radiators') }}</small></div>
+    </div>
+  </section>
+
+  <section class="form-panel">
+    <div class="top-actions">
+      <div class="language-switch">
+        <button type="button" [class.active]="i18n.language() === 'en'" (click)="i18n.setLanguage('en')">EN</button>
+        <button type="button" [class.active]="i18n.language() === 'fa'" (click)="i18n.setLanguage('fa')">فا</button>
+      </div>
+      <button class="theme-button" type="button" (click)="theme.toggle()">{{ theme.theme() === 'dark' ? '☀' : '☾'
+        }}</button>
+    </div>
+
+    <form class="login-card" (submit)="submitForm($event)" autocomplete="on">
+      <div class="mobile-brand"><span class="brand-mark"><span></span></span><strong>{{ i18n.t('brand.name') }}</strong>
+      </div>
+      <span class="eyebrow">{{ i18n.t('login.access') }}</span>
+      <h2>{{ i18n.t('login.title') }}</h2>
+      <p>{{ i18n.t('login.subtitle') }}</p>
+
+      <label>
+        <span>{{ i18n.t('login.username') }}</span>
+        <div class="field"><i class="pi pi-user"></i><input pInputText name="username" [ngModel]="username"
+            (ngModelChange)="username = $event; auth.clearError()" [ngModelOptions]="{standalone:true}"
+            autocomplete="username" [placeholder]="i18n.t('login.usernamePlaceholder')"></div>
+      </label>
+
+      <label>
+        <span>{{ i18n.t('login.password') }}</span>
+        <div class="field password-field"><i class="pi pi-lock"></i><p-password name="password" [ngModel]="password"
+            (ngModelChange)="password = $event; auth.clearError()" [ngModelOptions]="{standalone:true}"
+            [feedback]="false" [toggleMask]="true" autocomplete="current-password"
+            [placeholder]="i18n.t('login.passwordPlaceholder')" /></div>
+      </label>
+
+      @if (auth.error()) {
+      <p-message severity="error">{{ errorText() }}</p-message>
+      }
+
+      <p-button class="submit" type="submit" [loading]="auth.busy()"
+        [disabled]="auth.busy() || !username.trim() || !password"
+        [label]="auth.busy() ? i18n.t('login.signingIn') : i18n.t('login.signIn')" icon="pi pi-sign-in" />
+
+    </form>
+  </section>
+</main>

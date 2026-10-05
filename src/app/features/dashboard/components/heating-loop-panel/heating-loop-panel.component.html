@@ -1,0 +1,128 @@
+<div class="heating-shell">
+  <header class="heating-head">
+    <div class="head-copy">
+      <span class="eyebrow">{{ i18n.t('heating.eyebrow') }}</span>
+      <h2>{{ i18n.t('heating.title') }}</h2>
+      <p>{{ i18n.t('heating.subtitle') }}</p>
+    </div>
+    <div class="burner-state" [class.on]="telemetry.burnerOn" [class.off]="!telemetry.boilerEnabled">
+      <span class="burner-icon">{{ telemetry.boilerEnabled ? (telemetry.burnerOn ? '🔥' : '♨') : '⏻' }}</span>
+      <span><small>{{ i18n.t('heating.burner') }}</small><strong>{{ burnerStateText() }}</strong></span>
+    </div>
+  </header>
+
+  <section class="flow-card">
+    <div class="flow-card-head">
+      <div>
+        <span class="eyebrow">{{ i18n.t('heating.pathTitle') }}</span>
+        <h3>{{ i18n.t('heating.title') }}</h3>
+      </div>
+      <div class="legend-row">
+        <span class="legend hot"><i></i>{{ i18n.t('heating.flowLegendHot') }}</span>
+        <span class="legend cold"><i></i>{{ i18n.t('heating.flowLegendCold') }}</span>
+      </div>
+    </div>
+
+    <div class="process-flow" [class.flow-active]="flowActive()" [class.flow-off]="!flowActive()">
+      <article class="equipment-card pump-card">
+        <div class="equipment-icon pump-icon">↻</div>
+        <div class="equipment-copy">
+          <small>{{ i18n.t('heating.pumpNode') }}</small>
+          <strong>{{ telemetry.flowLpm | number:'1.1-1' }} <em>L/min</em></strong>
+          <span>{{ telemetry.pumpRunning ? i18n.t('control.running') : i18n.t('control.stopped') }}</span>
+        </div>
+      </article>
+
+      <div class="connector supply-connector">
+        <span class="pipe-line hot-line"><i></i></span>
+        <small>{{ i18n.t('heating.flowLegendHot') }}</small>
+      </div>
+
+      <article class="equipment-card boiler-card">
+        <div class="boiler-title">
+          <div><small>{{ i18n.t('heating.boilerNode') }}</small><strong>{{ telemetry.boilerEnabled ?
+              i18n.t('heating.on') : i18n.t('control.off') }}</strong></div>
+          <span class="flame-mini" [class.on]="telemetry.burnerOn">{{ telemetry.burnerOn ? '🔥' : '♨' }}</span>
+        </div>
+
+        <div class="boiler-grid">
+          <span><small>{{ i18n.t('heating.coldInlet') }}</small><strong>{{ telemetry.boilerColdInletC | number:'1.1-1'
+              }}°C</strong></span>
+          <span><small>{{ i18n.t('heating.hotOutlet') }}</small><strong>{{ telemetry.boilerHotOutletC | number:'1.1-1'
+              }}°C</strong></span>
+          <span><small>{{ i18n.t('dashboard.boilerSupply') }}</small><strong>{{ telemetry.boilerSupplyC | number:'1.1-1'
+              }}°C</strong></span>
+          <span><small>{{ i18n.t('dashboard.boilerReturn') }}</small><strong>{{ telemetry.boilerReturnC | number:'1.1-1'
+              }}°C</strong></span>
+        </div>
+
+        <div class="exchanger" [class.active]="telemetry.burnerOn">
+          <small>{{ i18n.t('heating.exchanger') }}</small>
+          <strong>{{ telemetry.heatExchangerC | number:'1.1-1' }}°C</strong>
+        </div>
+      </article>
+
+      <div class="connector radiator-connector">
+        <span class="pipe-line hot-line"><i></i></span>
+        <small>{{ i18n.t('heating.supply') }}</small>
+      </div>
+
+      <section class="radiator-bank">
+        <div class="bank-head">
+          <span><small>{{ i18n.t('heating.radiators') }}</small><strong>5 × {{ i18n.t('heating.radiator')
+              }}</strong></span>
+          <span class="loop-valve">{{ i18n.t('heating.loopStatus') }} · {{ telemetry.radiatorValvePct | number:'1.0-0'
+            }}%</span>
+        </div>
+
+        <div class="radiator-grid">
+          @for (temp of telemetry.radiatorTempsC; track $index; let i = $index) {
+          <article class="radiator" [class.zone-off]="zoneValve(i) === 0"
+            [class.zone-airlock]="telemetry.heatingFaultMode === 'AIRLOCK' && i === 2"
+            [style.--heat]="heatPercent(temp)">
+            <div class="radiator-top">
+              <strong>{{ i18n.t('heating.radiator') }} {{ i + 1 }}</strong>
+              <small>{{ zoneValve(i) }}%</small>
+            </div>
+            <div class="radiator-bars">
+              @for (segment of [0,1,2,3,4]; track $index) { <i></i> }
+            </div>
+            <div class="radiator-bottom">
+              <strong>{{ temp | number:'1.1-1' }}°C</strong>
+              <small>{{ temp >= 43 && flowActive() ? i18n.t('heating.flowing') : i18n.t('heating.cooling') }}</small>
+            </div>
+          </article>
+          }
+        </div>
+      </section>
+    </div>
+
+    <div class="return-line-row" [class.active]="flowActive()">
+      <span class="return-label">{{ i18n.t('heating.return') }}</span>
+      <span class="return-pipe"><i></i></span>
+      <strong>{{ telemetry.boilerReturnC | number:'1.1-1' }}°C</strong>
+    </div>
+  </section>
+
+  <div class="summary-grid">
+    <article class="summary-card burner-card" [class.on]="telemetry.burnerOn" [class.off]="!telemetry.boilerEnabled">
+      <div class="summary-title"><small>{{ i18n.t('heating.burnerAlarm') }}</small><strong>{{ burnerTitle() }}</strong>
+      </div>
+      <p>{{ burnerMessage() }}</p>
+    </article>
+
+    <article class="summary-card metric"><small>{{ i18n.t('heating.exchanger') }}</small><strong>{{
+        telemetry.heatExchangerC | number:'1.1-1' }} °C</strong></article>
+    <article class="summary-card metric"><small>{{ i18n.t('heating.avgTemp') }}</small><strong>{{ averageRadiatorTemp()
+        | number:'1.1-1' }} °C</strong></article>
+    <article class="summary-card metric"><small>{{ i18n.t('heating.threshold') }}</small><strong>41.5 °C</strong>
+    </article>
+    <article class="summary-card metric"><small>{{ i18n.t('heating.loopStatus') }}</small><strong>{{ valveLabel()
+        }}</strong></article>
+  </div>
+
+  <div class="status-callout" [class.on]="telemetry.burnerOn" [class.off]="!telemetry.boilerEnabled">
+    <span class="dot"></span>
+    <p>{{ statusText() }}</p>
+  </div>
+</div>

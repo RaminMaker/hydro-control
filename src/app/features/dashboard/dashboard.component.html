@@ -1,0 +1,116 @@
+<section class="dashboard-grid">
+  <div class="metrics-strip">
+    <app-metric-needle-gauge [label]="i18n.t('dashboard.flowRate')" [value]="t().flowLpm" [min]="0" [max]="40"
+      [decimals]="1" unit="L/min" icon="≈" tone="good" [status]="i18n.t('dashboard.live')" />
+
+    <app-metric-needle-gauge [label]="i18n.t('dashboard.motorSpeed')" [value]="t().rpm" [min]="0" [max]="3000"
+      [decimals]="0" unit="RPM" icon="↻" [status]="i18n.t('dashboard.vfdOutput') + ' ' + rpmPct() + '%'" />
+
+    <app-metric-needle-gauge [label]="i18n.t('dashboard.boilerSupply')" [value]="t().boilerSupplyC" [min]="20"
+      [max]="80" [decimals]="1" unit="°C" icon="♨" tone="warm"
+      [status]="i18n.t('dashboard.boilerReturn') + ' ' + t().boilerReturnC.toFixed(1) + '°C'" />
+
+    <app-metric-needle-gauge [label]="i18n.t('dashboard.heatExchanger')" [value]="t().heatExchangerC" [min]="20"
+      [max]="90" [decimals]="1" unit="°C" icon="◉" tone="warm"
+      [status]="i18n.t('dashboard.burner') + ' · ' + (t().burnerOn ? i18n.t('heating.on') : i18n.t('heating.off'))" />
+
+    <app-metric-needle-gauge [label]="i18n.t('dashboard.powerDraw')" [value]="t().powerKw" [min]="0" [max]="1.6"
+      [decimals]="2" unit="kW" icon="ϟ" tone="good" [status]="efficiency() + '% ' + i18n.t('dashboard.efficiency')" />
+
+    <app-metric-needle-gauge [label]="i18n.t('dashboard.motorTemp')" [value]="t().temperatureC" [min]="20" [max]="90"
+      [decimals]="1" unit="°C" icon="°" [tone]="t().temperatureC > 62 ? 'warn' : 'default'"
+      [status]="i18n.t('dashboard.thermalNominal')" />
+  </div>
+
+  <article class="panel twin-panel">
+    <header class="twin-head">
+      <div class="twin-title"><span class="eyebrow">{{ i18n.t('dashboard.asset') }}</span>
+        <h2>{{ i18n.t('dashboard.digitalTwin') }}</h2>
+      </div>
+      <div class="asset-meta">
+        <span class="asset-stat">{{ i18n.t('dashboard.head') }} <bdi dir="ltr">{{ headMeters() }} m</bdi></span>
+        <span class="asset-stat">{{ i18n.t('dashboard.valve') }} <bdi dir="ltr">{{ t().valvePct | number:'1.0-0'
+            }}%</bdi></span>
+      </div>
+    </header>
+    <app-pump-scene3d [telemetry]="t()" />
+  </article>
+
+  <article class="panel gauge-panel">
+    <div class="panel-head">
+      <div><span class="eyebrow">{{ i18n.t('dashboard.processValue') }}</span>
+        <h2>{{ i18n.t('dashboard.pressureLoop') }}</h2>
+      </div><span class="chip">PT-01</span>
+    </div>
+    <app-pressure-gauge [value]="t().pressureBar" [target]="t().targetPressureBar" />
+    <div class="gauge-foot"><span><small>{{ i18n.t('dashboard.lowLimit') }}</small><strong>1.8
+          bar</strong></span><span><small>{{ i18n.t('dashboard.deadband')
+          }}</small><strong>±0.15</strong></span><span><small>{{ i18n.t('dashboard.highLimit') }}</small><strong>5.5
+          bar</strong></span></div>
+  </article>
+
+  <article class="panel chart-panel">
+    <div class="panel-head">
+      <div><span class="eyebrow">{{ i18n.t('dashboard.realTimeTrend') }}</span>
+        <h2>{{ i18n.t('dashboard.hydraulicTelemetry') }}</h2>
+      </div>
+      <p-tag icon="pi pi-chart-line" [value]="i18n.t('trend.interactive')" severity="info" />
+    </div>
+    <app-telemetry-canvas [telemetry]="t()" />
+  </article>
+
+  <article class="panel control-panel"><app-control-panel [telemetry]="t()" (command)="send($event)" /></article>
+
+  <article class="panel heating-panel"><app-heating-loop-panel [telemetry]="t()" /></article>
+
+  <article class="panel tank-panel">
+    <div class="panel-head">
+      <div><span class="eyebrow">{{ i18n.t('dashboard.supplyStorage') }}</span>
+        <h2>{{ i18n.t('dashboard.roofTank') }}</h2>
+      </div><span class="chip">LT-01</span>
+    </div>
+    <div class="tank-content">
+      <div class="tank-visual">
+        <div class="tank-water" [style.height.%]="t().tankLevelPct"><span class="bubble b1"></span><span
+            class="bubble b2"></span></div><span class="tank-value">{{ t().tankLevelPct | number:'1.0-0'
+          }}<small>%</small></span>
+      </div>
+      <div class="tank-stats"><span><small>{{ i18n.t('dashboard.estVolume') }}</small><strong>{{ tankLiters() |
+            number:'1.0-0' }} L</strong></span><span><small>{{ i18n.t('dashboard.reserve') }}</small><strong>{{
+            reserveMinutes() }} min</strong></span><span><small>{{ i18n.t('dashboard.levelState') }}</small><strong
+            class="good-text">{{ i18n.t('dashboard.normal') }}</strong></span></div>
+    </div>
+  </article>
+
+  <article class="panel alarms-panel">
+    <div class="panel-head">
+      <div><span class="eyebrow">{{ i18n.t('dashboard.eventJournal') }}</span>
+        <h2>{{ i18n.t('dashboard.systemEvents') }}</h2>
+      </div><span class="alarm-count">{{ pump.activeAlarms().length }} {{ i18n.t('dashboard.active') }}</span>
+    </div>
+    @if (burnerAlarm()) {
+    <div class="burner-alert" [class.on]="t().burnerOn">
+      <span class="burner-alert-icon">{{ t().burnerOn ? '🔥' : '♨' }}</span>
+      <div><strong>{{ i18n.server(burnerAlarm()!.title) }}</strong><small>{{ i18n.server(burnerAlarm()!.message)
+          }}</small></div>
+    </div>
+    }
+    <div class="event-list">
+      @if (pump.alarms().length === 0) {
+      <div class="empty-state"><span>✓</span><strong>{{ i18n.t('dashboard.noFaults') }}</strong><small>{{
+          i18n.t('dashboard.noFaultsText') }}</small></div>
+      } @else {
+      @for (alarm of pump.alarms().slice(0, 4); track alarm.id) {
+      <button class="event-row" [class.acked]="alarm.acknowledged" (click)="pump.acknowledgeAlarm(alarm.id)">
+        <span class="event-severity" [attr.data-level]="alarm.severity"></span>
+        <span class="event-copy"><strong>{{ i18n.server(alarm.title) }}</strong><small>{{ i18n.server(alarm.message)
+            }}</small></span>
+        <time>{{ alarm.timestamp | date:'HH:mm:ss' }}</time>
+      </button>
+      }
+      }
+    </div>
+    <div class="ack-line"><span>{{ i18n.t('dashboard.lastAck') }}</span><strong>{{ i18n.server(pump.lastAck())
+        }}</strong></div>
+  </article>
+</section>

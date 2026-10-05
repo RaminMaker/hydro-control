@@ -1,0 +1,57 @@
+<section class="page-head">
+  <div>
+    <span class="eyebrow">{{ i18n.t('alarms.eyebrow') }}</span>
+    <h2>{{ i18n.t('alarms.title') }}</h2>
+    <p>{{ i18n.t('alarms.subtitle') }}</p>
+  </div>
+  <span class="alarm-summary" [class.has-alerts]="pump.activeAlarms().length > 0">
+    <i class="summary-light" aria-hidden="true"></i>
+    {{ pump.activeAlarms().length }} {{ i18n.t('alarms.unack') }}
+  </span>
+</section>
+
+<p-card styleClass="alarm-prime-card">
+  <p-table [value]="pump.alarms()" dataKey="id" [paginator]="pump.alarms().length > 8"
+    [rows]="8" [rowsPerPageOptions]="[8,16,32]" [stripedRows]="true"
+    [scrollable]="true" styleClass="alarms-prime-table" [tableStyle]="{'min-width':'580px'}">
+    <ng-template #header>
+      <tr>
+        <th>{{ i18n.t('alarms.severity') }}</th>
+        <th>{{ i18n.t('alarms.event') }}</th>
+        <th>{{ i18n.t('alarms.time') }}</th>
+        <th>{{ i18n.t('alarms.state') }}</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-alarm>
+      <tr class="alarm-entry" [class.acknowledged]="alarm.acknowledged"
+        [attr.data-level]="alarm.severity">
+        <td>
+          <span class="severity-badge" [attr.data-level]="alarm.severity"
+            [class.acknowledged]="alarm.acknowledged">
+            <i class="severity-beacon" aria-hidden="true"></i>
+            {{ i18n.severity(alarm.severity) }}
+          </span>
+        </td>
+        <td class="alarm-event">
+          <strong>{{ i18n.server(alarm.title) }}</strong>
+          <small class="alarm-detail">{{ i18n.server(alarm.message) }}</small>
+        </td>
+        <td><time class="alarm-time">{{ alarm.timestamp | date:'yyyy/MM/dd HH:mm' }}</time></td>
+        <td>
+          <p-button class="ack-button" [class.acknowledged]="alarm.acknowledged"
+            size="small" [outlined]="true" [disabled]="alarm.acknowledged"
+            [icon]="alarm.acknowledged ? 'pi pi-check-circle' : 'pi pi-check'"
+            [label]="alarm.acknowledged ? i18n.t('alarms.acked') : i18n.t('alarms.active')"
+            (onClick)="pump.acknowledgeAlarm(alarm.id)" />
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr><td colspan="4" class="empty-state">
+        <span class="empty-mark" aria-hidden="true"><i class="pi pi-check-circle"></i></span>
+        <strong>{{ i18n.t('alarms.healthy') }}</strong>
+        <small>{{ i18n.t('alarms.empty') }}</small>
+      </td></tr>
+    </ng-template>
+  </p-table>
+</p-card>

@@ -1,0 +1,8 @@
+<router-outlet />
+<div class="route-progress" [class.visible]="navigating()"><span></span></div>
+@if (navigating()) {
+<div class="route-loader" aria-live="polite">
+  <div class="loader-core"><i></i><i></i><b></b></div>
+  <span>{{ i18n.t('loading.route') }}</span>
+</div>
+}

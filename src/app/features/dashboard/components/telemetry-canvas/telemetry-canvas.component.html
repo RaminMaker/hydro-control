@@ -1,0 +1,28 @@
+<section class="trend-shell">
+  <div class="trend-toolbar">
+    <div class="ranges" role="group" [attr.aria-label]="i18n.t('trend.range')">
+      @for (item of ranges; track item.value) {
+        <p-button size="small" [outlined]="range() !== item.value" [text]="range() !== item.value"
+          [label]="i18n.t(item.label)" (onClick)="changeRange(item.value)"
+          [severity]="range() === item.value ? 'primary' : 'secondary'" />
+      }
+    </div>
+    <div class="zoom-buttons">
+      <p-button icon="pi pi-search-plus" [text]="true" [rounded]="true" size="small" (onClick)="zoomIn()" [attr.aria-label]="i18n.t('trend.zoomIn')" />
+      <p-button icon="pi pi-search-minus" [text]="true" [rounded]="true" size="small" (onClick)="zoomOut()" [attr.aria-label]="i18n.t('trend.zoomOut')" />
+      <p-button icon="pi pi-refresh" [text]="true" [rounded]="true" size="small" (onClick)="resetZoom()" [attr.aria-label]="i18n.t('trend.resetZoom')" />
+    </div>
+  </div>
+  <div class="trend-chart" [class.is-loading]="loading()">
+    <p-chart #plot type="line" [data]="chartData" [options]="chartOptions" width="100%" height="100%" />
+    @if (loading()) { <div class="chart-loading"><i class="pi pi-spin pi-spinner"></i></div> }
+    @if (error()) { <div class="chart-error">{{ i18n.t('trend.historyUnavailable') }}</div> }
+  </div>
+  <div class="trend-footer">
+    <div class="series-legend">
+      <span><i class="legend-point pressure"></i>{{ i18n.t('chart.pressure') }} · bar</span>
+      <span><i class="legend-point flow"></i>{{ i18n.t('chart.flow') }} · L/min</span>
+    </div>
+    <small>{{ i18n.t('trend.interactionHint') }} · {{ i18n.t('trend.simulatedNotice') }}</small>
+  </div>
+</section>

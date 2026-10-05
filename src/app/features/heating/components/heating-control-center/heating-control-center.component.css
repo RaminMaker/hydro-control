@@ -1,0 +1,241 @@
+.prime-power {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted-strong);
+    font-size: 12px
+}
+
+.zone-card p-slider {
+    display: block;
+    width: 100%;
+    margin: 12px 0
+}
+
+.zone-card p-progressbar {
+    display: block;
+    width: 100%
+}
+
+.zone-card p-button {
+    display: block;
+    width: 100%
+}
+
+.fault-buttons .p-selectbutton {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px
+}
+
+.fault-buttons {
+    min-width: 0
+}
+
+:host {
+    display: block
+}
+
+.control-center {
+    display: grid;
+    gap: 16px
+}
+
+.center-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px
+}
+
+.center-head h3 {
+    margin: 5px 0 0;
+    font-size: 16px
+}
+
+.eyebrow {
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: .14em;
+    font-weight: 800
+}
+
+.power {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 11px;
+    border: 1px solid rgba(255, 93, 93, .18);
+    background: rgba(255, 93, 93, .06);
+    color: var(--danger);
+    font: 800 9px/1 inherit;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer
+}
+
+.power.on {
+    border-color: var(--green-border);
+    background: rgba(69, 223, 154, .07);
+    color: var(--green)
+}
+
+.power span {
+    font-size: 15px
+}
+
+.fault-switcher {
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-soft)
+}
+
+.fault-switcher>span {
+    font-size: 8px;
+    letter-spacing: .12em;
+    color: var(--muted);
+    font-weight: 800
+}
+
+.fault-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    margin-top: 10px
+}
+
+.fault-buttons button {
+    min-height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-input);
+    color: var(--muted-strong);
+    font: 700 9px/1.35 inherit;
+    cursor: pointer
+}
+
+.fault-buttons button.active {
+    border-color: var(--accent-border);
+    background: var(--accent-soft-strong);
+    color: var(--accent-text)
+}
+
+.fault-buttons button:nth-child(n+2).active {
+    border-color: rgba(255, 93, 93, .24);
+    background: rgba(255, 93, 93, .08);
+    color: var(--danger)
+}
+
+.zone-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 9px
+}
+
+.zone-card {
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--surface-soft), transparent 120%);
+    display: grid;
+    gap: 9px
+}
+
+.zone-card.closed {
+    opacity: .58
+}
+
+.zone-top,
+.zone-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 7px
+}
+
+.zone-top strong {
+    font-size: 10px
+}
+
+.zone-top span {
+    font-size: 12px;
+    font-weight: 800
+}
+
+.zone-bottom small {
+    font-size: 8px;
+    color: var(--muted)
+}
+
+.zone-bottom strong {
+    font-size: 10px
+}
+
+.zone-meter {
+    height: 5px;
+    border-radius: 999px;
+    background: var(--surface-input);
+    overflow: hidden
+}
+
+.zone-meter i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--cyan), var(--amber));
+    transition: width .25s
+}
+
+.zone-card input {
+    width: 100%;
+    accent-color: var(--cyan)
+}
+
+.zone-card button {
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface-input);
+    color: var(--muted-strong);
+    font: 700 8px/1 inherit;
+    cursor: pointer
+}
+
+@media(max-width:1100px) {
+    .zone-grid {
+        grid-template-columns: repeat(3, 1fr)
+    }
+
+    .fault-buttons {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+@media(max-width:650px) {
+    .center-head {
+        align-items: flex-start;
+        flex-direction: column
+    }
+
+    .power {
+        width: 100%;
+        justify-content: center
+    }
+
+    .zone-grid {
+        grid-template-columns: 1fr 1fr
+    }
+
+    .fault-buttons {
+        grid-template-columns: 1fr 1fr
+    }
+}
+
+@media(max-width:430px) {
+
+    .zone-grid,
+    .fault-buttons {
+        grid-template-columns: 1fr
+    }
+}

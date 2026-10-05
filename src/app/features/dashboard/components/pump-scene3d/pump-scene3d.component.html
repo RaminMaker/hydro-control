@@ -1,0 +1,121 @@
+<div class="scene-shell" #host [class.interaction-locked]="sceneLocked()">
+  <div class="scene-badge"><span></span>{{ i18n.t('scene.badge') }}</div>
+
+  <div class="scene-toolbar">
+    <button type="button" class="lock-toggle" [class.unlocked]="!sceneLocked()" (click)="toggleSceneLock()"
+      [attr.aria-pressed]="sceneLocked()" [attr.title]="sceneLocked() ? i18n.t('scene.unlock') : i18n.t('scene.lock')">
+      <i [class]="sceneLocked() ? 'pi pi-lock' : 'pi pi-lock-open'"></i>
+      <span>{{ sceneLocked() ? i18n.t('scene.locked') : i18n.t('scene.unlocked') }}</span>
+    </button>
+    <button type="button" [class.active]="focusedInterior()" [disabled]="sceneLocked()" (click)="focusInterior()"
+      [attr.title]="i18n.t('scene.focus')">◎ <span>{{ i18n.t('scene.focus') }}</span></button>
+    <button type="button" [class.active]="explodedView()" [disabled]="sceneLocked()" (click)="toggleExploded()"
+      [attr.title]="i18n.t('scene.explode')">✦ <span>{{ i18n.t('scene.explode') }}</span></button>
+    <button type="button" [class.active]="showLabels()" (click)="toggleLabels()" [attr.title]="i18n.t('scene.labels')">⌖
+      <span>{{ i18n.t('scene.labels') }}</span></button>
+    <button type="button" [disabled]="sceneLocked()" (click)="resetView()" [attr.title]="i18n.t('scene.reset')">↺
+      <span>{{ i18n.t('scene.reset') }}</span></button>
+  </div>
+
+  <div class="scene-file-actions">
+    <input type="file" #modelInput hidden multiple accept=".glb,.gltf,.bin,.obj,.mtl,.stl,.png,.jpg,.jpeg,.webp"
+      (change)="importModel($event)" [attr.aria-label]="i18n.t('scene.importModel')" />
+    <button type="button" class="file-action" [disabled]="importBusy()" (click)="modelInput.click()">
+      <i class="pi pi-upload"></i> <span>{{ i18n.t('scene.importModel') }}</span>
+    </button>
+    <div class="export-wrapper">
+      <button type="button" class="file-action" [disabled]="exportBusy()" [attr.aria-expanded]="exportMenuOpen()"
+        (click)="exportMenuOpen.set(!exportMenuOpen())">
+        <i class="pi pi-download"></i> <span>{{ i18n.t('scene.exportModel') }}</span>
+      </button>
+      @if (exportMenuOpen()) {
+      <div class="export-dropdown" role="group" [attr.aria-label]="i18n.t('scene.exportModel')">
+        <label class="export-scope">
+          {{ i18n.t('scene.exportTarget') }}
+          <select [value]="exportScope()" (change)="exportScope.set($any($event.target).value)">
+            <option value="all">{{ i18n.t('scene.wholePlant') }}</option>
+            <option value="part" [disabled]="!selectedPart()">{{ i18n.t('scene.selectedPart') }}</option>
+          </select>
+        </label>
+        <div class="export-types">
+          @for (format of formats; track format) {
+          <button type="button" (click)="exportModel(format)">{{ format.toUpperCase() }}</button>
+          }
+        </div>
+      </div>
+      }
+    </div>
+    @if (fileNotice()) {
+    <div class="file-notice" [class.error]="fileError()" role="status">
+      <span>{{ fileNotice() }}</span>
+      <button type="button" (click)="fileNotice.set('')" [attr.aria-label]="i18n.t('scene.dismiss')">×</button>
+    </div>
+    }
+  </div>
+
+  <div class="interior-tag" [class.visible]="interiorVisible()"><span></span>{{ i18n.t('scene.internal') }}</div>
+  <div class="scene-flow-legend"><span class="cold"><i></i>{{ i18n.t('heating.flowLegendCold') }}</span><span
+      class="hot"><i></i>{{ i18n.t('heating.flowLegendHot') }}</span></div>
+  <div class="scene-hint">
+    <i [class]="sceneLocked() ? 'pi pi-lock' : 'pi pi-arrows-alt'"></i>
+    {{ sceneLocked() ? i18n.t('scene.unlockHint') : i18n.t('scene.interactionHint') }}
+  </div>
+
+  <div class="label-layer" [class.visible]="showLabels()" [class.editable]="!sceneLocked()">
+    @for (label of annotationLabels(); track label.id) {
+    <button type="button" class="scene-label" [class.selected]="selectedPart() === label.id"
+      [attr.data-label]="label.id" [disabled]="sceneLocked()" (click)="openPartEditor(label.id)"
+      [attr.title]="sceneLocked() ? i18n.t('scene.unlockHint') : i18n.t('scene.clickToEdit')">
+      <span></span>{{ label.customName || i18n.t(label.key) }}
+      @if (!sceneLocked()) { <i class="pi pi-sliders-h"></i> }
+    </button>
+    }
+  </div>
+
+  @if (selectedPart() && partEditor(); as editor) {
+  <aside class="part-editor" [attr.aria-label]="i18n.t('scene.partSettings')">
+    <div class="editor-head">
+      <div><small>{{ i18n.t('scene.partSettings') }}</small>
+        <h3>{{ partName(selectedPart()) }}</h3>
+      </div>
+      <button type="button" class="editor-close" (click)="closePartEditor()"
+        [attr.aria-label]="i18n.t('scene.dismiss')">×</button>
+    </div>
+    <div class="editor-body">
+      @if (getPartMeasurements().length) {
+      <div class="part-metrics">
+        @for (metric of getPartMeasurements(); track metric.label) {
+        <div class="part-metric"><span>{{ metric.label }}</span><strong>{{ metric.value }}</strong></div>
+        }
+      </div>
+      }
+      <label class="editor-toggle"><span>{{ i18n.t('scene.partVisible') }}</span>
+        <input type="checkbox" [checked]="editor.visible" (change)="setPartVisibility($any($event.target).checked)" />
+      </label>
+      <label class="editor-field"><span>{{ i18n.t('scene.opacity') }} <bdi dir="ltr">{{ editor.opacity }}%</bdi></span>
+        <input type="range" min="0" max="100" step="5" [value]="editor.opacity"
+          (input)="setPartOpacity($any($event.target).value)" />
+      </label>
+      <label class="editor-field color-field"><span>{{ i18n.t('scene.materialColor') }}</span>
+        <input type="color" [value]="editor.color" (input)="setPartColor($any($event.target).value)" />
+      </label>
+      <label class="editor-field"><span>{{ i18n.t('scene.roughness') }} <bdi dir="ltr">{{ editor.roughness
+            }}%</bdi></span>
+        <input type="range" min="0" max="100" step="5" [value]="editor.roughness"
+          (input)="setPartRoughness($any($event.target).value)" />
+      </label>
+      <div class="editor-actions">
+        <button type="button" (click)="focusSelectedPart()"><i class="pi pi-search"></i>{{ i18n.t('scene.focusPart')
+          }}</button>
+        <button type="button" (click)="resetPartAppearance()"><i class="pi pi-undo"></i>{{ i18n.t('scene.resetPart')
+          }}</button>
+      </div>
+      @if (selectedPart() === 'imported') {
+      <button type="button" class="remove-model" (click)="removeImportedModel()"><i class="pi pi-trash"></i>{{
+        i18n.t('scene.removeImported') }}</button>
+      }
+      <small class="editor-note">{{ i18n.t('scene.visualOnly') }}</small>
+    </div>
+  </aside>
+  }
+</div>

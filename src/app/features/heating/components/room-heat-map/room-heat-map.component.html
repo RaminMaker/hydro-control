@@ -1,0 +1,45 @@
+<div class="room-map-shell">
+  <div class="room-map-head">
+    <div>
+      <span class="eyebrow">{{ i18n.t('heating.roomDistribution') }}</span>
+      <h3>{{ i18n.t('heating.roomDistribution') }}</h3>
+      <p>{{ i18n.t('heating.roomDistributionText') }}</p>
+    </div>
+    <div class="fault-pill" [class.fault]="telemetry.heatingFaultMode !== 'NONE'">
+      <span></span>{{ faultLabel() }}
+    </div>
+  </div>
+
+  <div class="floor-plan">
+    @for (room of rooms; track room.key; let i = $index) {
+    <article class="room" [class.airlock]="telemetry.heatingFaultMode === 'AIRLOCK' && i === 2"
+      [style.--heat]="roomHeat(i)" [attr.data-room]="i">
+      <div class="room-top">
+        <div>
+          <small>{{ i18n.t('heating.zoneLabel') }} {{ i + 1 }}</small>
+          <strong>{{ i18n.t(room.key) }}</strong>
+        </div>
+        <span class="room-temp">{{ telemetry.roomTempsC[i] | number:'1.1-1' }}°C</span>
+      </div>
+
+      <div class="room-body">
+        <div class="heat-field">
+          <span class="heat-ring r1"></span>
+          <span class="heat-ring r2"></span>
+          <span class="heat-ring r3"></span>
+        </div>
+        <div class="mini-radiator" [style.--radHeat]="radiatorHeat(i)">
+          @for (n of [0,1,2,3,4]; track $index) { <i></i> }
+        </div>
+      </div>
+
+      <div class="room-foot">
+        <span><small>{{ i18n.t('heating.zoneValve') }}</small><strong>{{ valve(i) }}%</strong></span>
+        <span><small>{{ i18n.t('heating.heatOutput') }}</small><strong>{{ heatOutput(i) }}%</strong></span>
+        <span><small>{{ i18n.t('heating.radiator') }}</small><strong>{{ telemetry.radiatorTempsC[i] | number:'1.1-1'
+            }}°C</strong></span>
+      </div>
+    </article>
+    }
+  </div>
+</div>

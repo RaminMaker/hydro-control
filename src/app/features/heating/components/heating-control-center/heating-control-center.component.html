@@ -1,0 +1,31 @@
+<div class="control-center">
+  <div class="center-head">
+    <div><span class="eyebrow">{{ i18n.t('control.remote') }}</span>
+      <h3>{{ i18n.t('control.boilerPackage') }}</h3>
+    </div>
+    <div class="prime-power"><p-toggleswitch [ngModel]="telemetry.boilerEnabled"
+        (ngModelChange)="emit({type:'SET_BOILER_ENABLED',value:$event})" /><span>{{ telemetry.boilerEnabled ?
+        i18n.t('heating.on') : i18n.t('control.off') }}</span></div>
+  </div>
+
+  <div class="fault-switcher">
+    <span>{{ i18n.t('control.faultSimulation') }}</span>
+    <p-selectbutton class="fault-buttons" [options]="faultOptions()" optionLabel="label" optionValue="value"
+      [ngModel]="telemetry.heatingFaultMode" (ngModelChange)="fault($event)" [allowEmpty]="false" />
+  </div>
+
+  <div class="zone-grid">
+    @for (value of telemetry.radiatorValvePcts; track $index; let i = $index) {
+    <article class="zone-card" [class.closed]="value === 0">
+      <div class="zone-top"><strong>{{ i18n.t('heating.radiator') }} {{ i + 1 }}</strong><span>{{
+          telemetry.roomTempsC[i].toFixed(1) }}°C</span></div>
+      <p-progressbar [value]="value" [showValue]="false" />
+      <div class="zone-bottom"><small>{{ i18n.t('heating.zoneValve') }}</small><strong>{{ value.toFixed(0) }}%</strong>
+      </div>
+      <p-slider [min]="0" [max]="100" [step]="1" [ngModel]="value" (ngModelChange)="setZoneValue(i,$event)" />
+      <p-button size="small" [outlined]="true" [label]="value === 0 ? i18n.t('control.open') : i18n.t('control.close')"
+        (onClick)="toggleZone(i)" />
+    </article>
+    }
+  </div>
+</div>

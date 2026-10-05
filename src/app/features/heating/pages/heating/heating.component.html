@@ -1,0 +1,53 @@
+<section class="page-head">
+  <div>
+    <span class="eyebrow">{{ i18n.t('heating.eyebrow') }}</span>
+    <h2>{{ i18n.t('heating.title') }}</h2>
+    <p>{{ i18n.t('heating.subtitle') }}</p>
+  </div>
+</section>
+
+<div class="heating-grid">
+  <article class="panel hero-panel">
+    <div class="panel-head">
+      <div><span class="eyebrow">{{ i18n.t('analytics.trend') }}</span>
+        <h3>{{ i18n.t('analytics.heatingTrend') }}</h3>
+      </div>
+      <span class="state-pill" [class.on]="pump.telemetry().burnerOn">{{ i18n.t('dashboard.burner') }} · {{
+        pump.telemetry().burnerOn ? i18n.t('heating.on') : i18n.t('heating.off') }}</span>
+    </div>
+    <app-heating-telemetry-canvas [telemetry]="pump.telemetry()" />
+  </article>
+
+  <article class="panel kpi">
+    <span>{{ i18n.t('dashboard.boilerSupply') }}</span>
+    <strong>{{ pump.telemetry().boilerSupplyC | number:'1.1-1' }}<small> °C</small></strong>
+    <p>{{ i18n.t('heating.supply') }}</p>
+  </article>
+  <article class="panel kpi">
+    <span>{{ i18n.t('dashboard.boilerReturn') }}</span>
+    <strong>{{ pump.telemetry().boilerReturnC | number:'1.1-1' }}<small> °C</small></strong>
+    <p>{{ i18n.t('heating.return') }}</p>
+  </article>
+  <article class="panel kpi">
+    <span>{{ i18n.t('dashboard.heatExchanger') }}</span>
+    <strong>{{ pump.telemetry().heatExchangerC | number:'1.1-1' }}<small> °C</small></strong>
+    <p>{{ i18n.t('heating.exchanger') }}</p>
+  </article>
+  <article class="panel kpi">
+    <span>{{ i18n.t('heating.avgTemp') }}</span>
+    <strong>{{ avgRadiator() | number:'1.1-1' }}<small> °C</small></strong>
+    <p>{{ i18n.t('heating.radiators') }}</p>
+  </article>
+
+  <article class="panel control-center-panel">
+    <app-heating-control-center [telemetry]="pump.telemetry()" (command)="send($event)" />
+  </article>
+
+  <article class="panel room-panel">
+    <app-room-heat-map [telemetry]="pump.telemetry()" />
+  </article>
+
+  <article class="panel loop-panel">
+    <app-heating-loop-panel [telemetry]="pump.telemetry()" />
+  </article>
+</div>

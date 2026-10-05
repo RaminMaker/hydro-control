@@ -1,0 +1,1388 @@
+:root {
+  --p-primary-color: var(--cyan);
+  --p-primary-contrast-color: #061820;
+  --p-primary-hover-color: var(--cyan);
+  --p-text-color: var(--text);
+  --p-content-background: var(--panel-bg-solid);
+  --p-content-color: var(--text);
+  --p-content-border-color: var(--line);
+  --p-surface-900: var(--panel-bg-solid)
+}
+
+.p-button {
+  font-family: inherit !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  white-space: normal;
+  line-height: 1.3;
+  min-height: 34px;
+  max-width: 100%
+}
+
+.p-button.p-button-sm {
+  font-size: 11px;
+  padding: 8px 10px
+}
+
+.p-button.p-button-text {
+  color: var(--muted-strong)
+}
+
+.p-toggleswitch {
+  flex: none !important;
+  display: inline-flex !important;
+  vertical-align: middle;
+  direction: ltr !important
+}
+
+.p-slider {
+  min-width: 0;
+  width: 100%;
+  height: 5px !important
+}
+
+.p-slider-handle {
+  width: 15px !important;
+  height: 15px !important
+}
+
+.p-inputtext,
+.p-password-input {
+  background: var(--surface-input) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--line-strong) !important;
+  min-height: 38px;
+  border-radius: 10px !important;
+  font: inherit
+}
+
+.p-password {
+  display: block;
+  min-width: 0;
+  width: 100%
+}
+
+.p-password .p-inputtext {
+  width: 100%
+}
+
+.p-card {
+  background: var(--panel-bg-solid) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  color: var(--text) !important;
+  box-shadow: var(--shadow)
+}
+
+.p-card .p-card-body {
+  padding: 14px !important
+}
+
+.p-tag {
+  font-family: inherit;
+  font-size: 10px;
+  line-height: 1.3;
+  white-space: normal
+}
+
+.analytics-hero .p-card-content {
+  display: grid;
+  gap: 12px
+}
+
+.analytics-hero .p-card-body {
+  padding: 13px !important
+}
+
+.analytics-kpi .p-card-content>span {
+  font-size: 10px;
+  color: var(--muted)
+}
+
+.analytics-kpi .p-card-content>strong {
+  display: block;
+  margin: 12px 0 5px;
+  font-size: 24px;
+  letter-spacing: -.03em;
+  color: var(--text-strong)
+}
+
+.analytics-kpi .p-card-content>strong small {
+  font-size: 10px;
+  color: var(--muted)
+}
+
+.analytics-kpi .p-card-content>p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--muted)
+}
+
+.settings-prime-card .p-card-content h3 {
+  margin: 6px 0 12px;
+  font-size: 14px
+}
+
+.settings-prime-card .p-card-content label {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 10px
+}
+
+.settings-prime-card .p-card-content input {
+  width: 100%;
+  margin-top: 7px;
+  font-size: 10px
+}
+
+.settings-prime-card .tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px
+}
+
+.alarm-prime-card .p-card-body {
+  padding: 0 !important
+}
+
+.alarms-prime-table {
+  max-width: 100%;
+  overflow: hidden
+}
+
+.alarms-prime-table th {
+  font-size: 11px !important;
+  background: var(--surface-elevated) !important;
+  color: var(--muted) !important
+}
+
+.alarms-prime-table td {
+  font-size: 11px !important;
+  background: var(--panel-bg-solid) !important;
+  color: var(--text) !important
+}
+
+.alarms-prime-table .alarm-detail {
+  color: var(--muted);
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  line-height: 1.6
+}
+
+.control-shell .p-selectbutton {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 100%
+}
+
+.control-shell .p-selectbutton .p-togglebutton {
+  flex: 1;
+  min-width: 65px;
+  padding: 8px
+}
+
+.control-shell p-slider,
+.control-center p-slider {
+  display: block;
+  margin: 12px 0;
+  width: 100%
+}
+
+.control-shell .fault-grid .p-selectbutton,
+.control-center .fault-buttons .p-selectbutton {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px
+}
+
+.control-shell .fault-grid .p-togglebutton,
+.control-center .fault-buttons .p-togglebutton {
+  font-size: 10px;
+  white-space: normal;
+  min-height: 40px
+}
+
+.control-center p-progressbar {
+  display: block;
+  height: 6px
+}
+
+.control-shell .control-actions p-button,
+.control-shell .loop-actions p-button,
+.control-center .zone-card p-button {
+  display: block;
+  width: 100%
+}
+
+.control-shell .control-actions .p-button,
+.control-shell .loop-actions .p-button,
+.control-center .zone-card .p-button {
+  width: 100%;
+  justify-content: center
+}
+
+.login-card p-button.submit {
+  width: 100%;
+  display: block;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important
+}
+
+.login-card p-button.submit .p-button {
+  width: 100%;
+  min-height: 43px;
+  background: linear-gradient(110deg, #32d6ec, #3dd7a3);
+  border: 0;
+  color: #061820
+}
+
+.login-card .password-field p-password {
+  display: block;
+  min-width: 0;
+  width: 100%
+}
+
+.login-card .password-field .p-password,
+.login-card .password-field input {
+  width: 100%
+}
+
+.login-card .field {
+  border: none;
+  background: transparent
+}
+
+.login-card .field input {
+  background: var(--surface-input) !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 10px
+}
+
+.topbar p-selectbutton.language-select .p-togglebutton {
+  padding: 6px 9px;
+  font-size: 10px;
+  min-height: 31px
+}
+
+.topbar p-button.theme-switch,
+.topbar p-button.quick-logout {
+  flex-shrink: 0
+}
+
+.control-shell p-selectbutton.mode-grid,
+.control-shell p-selectbutton.fault-grid,
+.control-center p-selectbutton.fault-buttons {
+  display: block !important;
+  min-width: 0;
+  width: 100%;
+  margin-top: 9px
+}
+
+.control-shell p-selectbutton.mode-grid>.p-selectbutton {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 5px
+}
+
+.control-shell p-selectbutton.fault-grid>.p-selectbutton,
+.control-center p-selectbutton.fault-buttons>.p-selectbutton {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px
+}
+
+.control-shell p-selectbutton .p-togglebutton,
+.control-center p-selectbutton .p-togglebutton {
+  min-width: 0 !important;
+  width: 100%;
+  white-space: normal !important;
+  padding: 7px !important;
+  font-size: 10px !important;
+  line-height: 1.5
+}
+
+.control-center .fault-buttons {
+  display: block !important
+}
+
+.control-shell .range-row p-slider,
+.control-center .zone-card p-slider {
+  height: 5px !important
+}
+
+.control-shell .zone-row p-slider {
+  grid-area: slider;
+  min-width: 0;
+  width: 100%;
+  margin: 0
+}
+
+.control-shell .zone-row p-button {
+  grid-area: action;
+  width: 100%;
+  min-width: 0
+}
+
+.control-shell .zone-row .zone-name {
+  grid-area: name
+}
+
+.control-shell .zone-row .zone-value {
+  grid-area: value;
+  direction: ltr;
+  text-align: center
+}
+
+html[dir='rtl'] {
+  --p-font-family: 'Vazir', Tahoma, Arial, sans-serif
+}
+
+@media(max-width:650px) {
+
+  .control-shell p-selectbutton.fault-grid>.p-selectbutton,
+  .control-center p-selectbutton.fault-buttons>.p-selectbutton {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important
+  }
+
+  .topbar p-selectbutton.language-select {
+    max-width: 92px;
+    flex-shrink: 0
+  }
+
+  .topbar p-selectbutton.language-select .p-togglebutton {
+    min-width: 38px;
+    padding: 5px
+  }
+
+  .control-shell .zone-row {
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr) 54px !important;
+    grid-template-areas: 'name action' 'slider value' !important
+  }
+}
+
+
+:root {
+  --p-border-radius-sm: 6px;
+  --p-border-radius-md: 10px;
+  --p-border-radius-lg: 14px;
+  --p-focus-ring-color: var(--cyan);
+  --p-inputtext-background: var(--surface-input);
+  --p-inputtext-color: var(--text);
+  --p-form-field-background: var(--surface-input);
+  --p-form-field-color: var(--text);
+  --p-form-field-border-color: var(--line-strong);
+  --p-form-field-hover-border-color: var(--accent-border);
+  --p-form-field-focus-border-color: var(--cyan);
+  --p-toggleswitch-width: 3.1rem;
+  --p-toggleswitch-height: 1.75rem;
+  --p-toggleswitch-handle-size: 1.25rem;
+  --p-slider-track-background: var(--line-strong);
+  --p-card-color: var(--text);
+  --p-card-background: var(--panel-bg-solid);
+}
+
+.p-button,
+.p-inputtext,
+.p-password-input,
+.p-togglebutton,
+.p-card,
+.p-message,
+.p-tag,
+.p-datatable {
+  font-family: inherit;
+}
+
+.p-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 9px;
+  line-height: 1.4;
+  min-height: 34px;
+  font-size: 11px;
+}
+
+.p-button .p-button-label {
+  min-width: 0;
+  line-height: 1.4;
+  white-space: normal
+}
+
+p-button {
+  min-width: 0
+}
+
+.p-card {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden
+}
+
+.p-card .p-card-body {
+  padding: 14px
+}
+
+.p-card .p-card-content {
+  padding: 0;
+  min-width: 0
+}
+
+.p-tag {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-width: 0;
+  font-size: 10px;
+  line-height: 1.45
+}
+
+app-shell p-selectbutton.language-select {
+  display: block;
+  max-width: 100%
+}
+
+app-shell .topbar .p-selectbutton {
+  display: inline-flex;
+  max-width: 100%;
+  gap: 3px;
+  align-items: center
+}
+
+app-shell .topbar .p-selectbutton .p-togglebutton {
+  min-width: 35px;
+  min-height: 32px;
+  padding: 5px 8px;
+  font-size: 10px
+}
+
+app-control-panel p-selectbutton.mode-grid,
+app-control-panel p-selectbutton.fault-grid,
+app-heating-control-center p-selectbutton.fault-buttons {
+  display: block;
+  width: 100%;
+  min-width: 0
+}
+
+app-control-panel p-selectbutton.mode-grid .p-selectbutton {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%
+}
+
+app-control-panel p-selectbutton.fault-grid .p-selectbutton,
+app-heating-control-center p-selectbutton.fault-buttons .p-selectbutton {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  width: 100%
+}
+
+app-control-panel .p-togglebutton,
+app-heating-control-center .p-togglebutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  word-break: normal;
+  min-width: 0;
+  min-height: 38px;
+  padding: 7px 8px;
+  font-size: 10px;
+  line-height: 1.55;
+  border-radius: 9px
+}
+
+app-control-panel .control-actions .p-button,
+app-control-panel .loop-actions .p-button,
+app-heating-control-center .zone-card .p-button {
+  width: 100%;
+  height: 100%;
+  min-height: 34px
+}
+
+app-control-panel .control-actions p-button,
+app-control-panel .loop-actions p-button,
+app-heating-control-center .zone-card p-button {
+  display: block;
+  width: 100%;
+  min-width: 0
+}
+
+app-control-panel p-slider,
+app-heating-control-center p-slider {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  align-self: center
+}
+
+app-control-panel .p-slider,
+app-heating-control-center .p-slider {
+  width: 100%;
+  min-width: 0;
+  height: 6px
+}
+
+app-control-panel .p-slider-range,
+app-heating-control-center .p-slider-range {
+  background: var(--cyan)
+}
+
+app-control-panel .p-slider-handle,
+app-heating-control-center .p-slider-handle {
+  width: 16px;
+  height: 16px;
+  background: var(--panel-bg-solid);
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 0 3px var(--accent-glow)
+}
+
+app-control-panel p-toggleswitch,
+app-heating-control-center p-toggleswitch {
+  display: inline-flex;
+  direction: ltr;
+  flex: 0 0 auto;
+  vertical-align: middle
+}
+
+.p-toggleswitch {
+  box-sizing: border-box;
+  flex: none;
+  max-width: 100%
+}
+
+.p-toggleswitch .p-toggleswitch-slider {
+  box-sizing: border-box;
+  border-radius: 999px
+}
+
+app-login .login-card .p-password {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0
+}
+
+app-login .login-card .p-password-input,
+app-login .login-card .p-inputtext {
+  min-height: 39px;
+  width: 100%;
+  box-sizing: border-box
+}
+
+app-login .login-card .p-password-toggle-mask-icon {
+  inset-inline-end: 8px
+}
+
+app-login .login-card p-message {
+  display: block;
+  width: 100%
+}
+
+app-login .login-card p-button.submit {
+  display: block;
+  width: 100%
+}
+
+app-login .login-card p-button.submit .p-button {
+  width: 100%;
+  min-height: 42px;
+  justify-content: center;
+  border-radius: 11px;
+  background: linear-gradient(120deg, #32d6ec, #3dd7a3);
+  border: 0;
+  color: #061820
+}
+
+.p-datatable {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto
+}
+
+.p-datatable-table {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: separate
+}
+
+.p-datatable-thead>tr>th {
+  white-space: normal;
+  font-size: 11px;
+  padding: 12px;
+  background: var(--surface-elevated);
+  color: var(--muted-strong);
+  border-color: var(--line)
+}
+
+.p-datatable-tbody>tr>td {
+  font-size: 11px;
+  padding: 12px;
+  background: var(--panel-bg-solid);
+  color: var(--text);
+  border-color: var(--line);
+  vertical-align: top
+}
+
+html[dir='rtl'] .p-button,
+html[dir='rtl'] .p-inputtext,
+html[dir='rtl'] .p-password-input,
+html[dir='rtl'] .p-togglebutton {
+  font-family: 'Vazir', Tahoma, Arial, sans-serif
+}
+
+@media (max-width:700px) {
+  .p-card .p-card-body {
+    padding: 12px
+  }
+
+  .p-datatable-thead>tr>th,
+  .p-datatable-tbody>tr>td {
+    padding: 9px;
+    font-size: 10px
+  }
+
+  app-control-panel .p-togglebutton,
+  app-heating-control-center .p-togglebutton {
+    min-height: 37px;
+    font-size: 10px
+  }
+}
+
+app-login .login-card .field .p-inputtext,
+app-login .login-card .field .p-password-input {
+  box-shadow: none !important;
+  outline: 0 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  min-height: 38px !important;
+  padding: 0 9px !important;
+  color: var(--text-strong) !important;
+}
+
+app-login .login-card .field .p-password {
+  height: 100%;
+  display: flex;
+  align-items: center
+}
+
+app-login .login-card .field .p-password input {
+  padding-inline-end: 42px !important
+}
+
+app-login .login-card .field:focus-within {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px var(--accent-glow)
+}
+
+:root {
+  --p-togglebutton-background: var(--surface-input);
+  --p-togglebutton-color: var(--muted-strong);
+  --p-togglebutton-border-color: var(--line-strong);
+  --p-togglebutton-hover-background: var(--surface-hover);
+  --p-togglebutton-hover-color: var(--text-strong);
+  --p-togglebutton-hover-border-color: var(--accent-border);
+  --p-togglebutton-checked-background: var(--accent-soft-strong);
+  --p-togglebutton-checked-color: var(--accent-text);
+  --p-togglebutton-checked-border-color: var(--cyan);
+  --p-togglebutton-checked-hover-background: var(--accent-soft-strong);
+  --p-togglebutton-checked-hover-color: var(--accent-text);
+}
+
+app-control-panel p-selectbutton.mode-grid .p-selectbutton,
+app-control-panel p-selectbutton.fault-grid .p-selectbutton,
+app-heating-control-center p-selectbutton.fault-buttons .p-selectbutton {
+  display: grid !important;
+  gap: 7px !important;
+  padding: 3px !important;
+  max-width: 100%;
+  width: 100% !important;
+  min-width: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+}
+
+app-control-panel p-selectbutton.mode-grid .p-selectbutton {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+app-control-panel p-selectbutton.fault-grid .p-selectbutton,
+app-heating-control-center p-selectbutton.fault-buttons .p-selectbutton {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+app-shell p-selectbutton.language-select {
+  width: auto !important;
+  display: inline-flex !important
+}
+
+app-shell p-selectbutton.language-select .p-selectbutton {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  width: auto !important;
+  padding: 4px !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 11px !important;
+  background: var(--surface-input) !important;
+}
+
+app-control-panel p-selectbutton.mode-grid p-togglebutton,
+app-control-panel p-selectbutton.fault-grid p-togglebutton,
+app-heating-control-center p-selectbutton.fault-buttons p-togglebutton {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+app-shell p-selectbutton.language-select .p-togglebutton,
+app-control-panel p-selectbutton.mode-grid .p-togglebutton,
+app-control-panel p-selectbutton.fault-grid .p-togglebutton,
+app-heating-control-center p-selectbutton.fault-buttons .p-togglebutton {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 39px !important;
+  margin: 0 !important;
+  padding: 7px 8px !important;
+  box-sizing: border-box !important;
+  background: var(--surface-input) !important;
+  color: var(--muted-strong) !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  line-height: 1.7 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  white-space: normal !important;
+  text-align: center !important;
+  transition: background .16s ease, color .16s ease, border-color .16s ease !important;
+}
+
+app-shell p-selectbutton.language-select .p-togglebutton {
+  width: auto !important;
+  min-width: 38px !important;
+  min-height: 31px !important;
+  padding: 5px 9px !important;
+  font-size: 11px !important;
+  border-color: transparent !important;
+}
+
+app-shell p-selectbutton .p-togglebutton:hover,
+app-control-panel p-selectbutton .p-togglebutton:hover,
+app-heating-control-center p-selectbutton .p-togglebutton:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text-strong) !important;
+  border-color: var(--accent-border) !important;
+}
+
+app-shell p-selectbutton .p-togglebutton.p-togglebutton-checked,
+app-control-panel p-selectbutton .p-togglebutton.p-togglebutton-checked,
+app-heating-control-center p-selectbutton .p-togglebutton.p-togglebutton-checked,
+app-shell p-selectbutton .p-togglebutton[aria-pressed='true'],
+app-control-panel p-selectbutton .p-togglebutton[aria-pressed='true'],
+app-heating-control-center p-selectbutton .p-togglebutton[aria-pressed='true'] {
+  background: var(--accent-soft-strong) !important;
+  border-color: var(--accent-border) !important;
+  color: var(--accent-text) !important;
+  box-shadow: inset 0 0 0 1px var(--accent-border), 0 2px 14px var(--accent-glow) !important;
+}
+
+app-shell p-button.theme-switch .p-button,
+app-shell p-button.quick-logout .p-button {
+  background: var(--surface-input) !important;
+  color: var(--accent-text) !important;
+  border: 1px solid var(--line-strong) !important;
+  box-shadow: none !important;
+}
+
+app-shell p-button.theme-switch .p-button:hover,
+app-shell p-button.quick-logout .p-button:hover {
+  background: var(--surface-hover) !important;
+  border-color: var(--accent-border) !important;
+}
+
+@media(max-width:460px) {
+
+  app-control-panel p-selectbutton.mode-grid .p-togglebutton,
+  app-control-panel p-selectbutton.fault-grid .p-togglebutton,
+  app-heating-control-center p-selectbutton.fault-buttons .p-togglebutton {
+    font-size: 10px !important;
+    padding: 7px 4px !important;
+    min-height: 37px !important;
+  }
+
+  app-shell p-selectbutton.language-select .p-togglebutton {
+    min-width: 31px !important;
+    padding: 5px 6px !important;
+  }
+}
+
+app-control-panel p-selectbutton.mode-grid,
+app-control-panel p-selectbutton.fault-grid,
+app-heating-control-center p-selectbutton.fault-buttons {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  grid-template-columns: none !important;
+  grid-auto-columns: auto !important;
+  gap: 0 !important;
+  margin: 8px 0 0 !important;
+}
+
+app-control-panel p-selectbutton :is(.p-togglebutton-content, .p-togglebutton-label),
+app-heating-control-center p-selectbutton :is(.p-togglebutton-content, .p-togglebutton-label),
+app-shell p-selectbutton :is(.p-togglebutton-content, .p-togglebutton-label) {
+  color: inherit !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: inherit !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+
+app-shell p-selectbutton.language-select .p-selectbutton {
+  padding: 4px !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--surface-input) 96%, transparent) !important
+}
+
+app-shell p-selectbutton.language-select .p-togglebutton {
+  background: transparent !important;
+  color: var(--muted-strong) !important;
+  border-color: transparent !important;
+  box-shadow: none !important
+}
+
+app-shell p-selectbutton.language-select .p-togglebutton.p-togglebutton-checked,
+app-shell p-selectbutton.language-select .p-togglebutton[aria-pressed='true'] {
+  background: var(--accent-soft-strong) !important;
+  color: var(--accent-text) !important;
+  border-color: var(--accent-border) !important
+}
+
+.p-toggleswitch .p-toggleswitch-slider {
+  background: color-mix(in srgb, var(--surface-input) 96%, transparent) !important;
+  border: 1px solid var(--line-strong) !important
+}
+
+.p-toggleswitch-checked .p-toggleswitch-slider {
+  background: rgba(46, 214, 244, .18) !important;
+  border-color: var(--accent-border) !important
+}
+
+.p-toggleswitch .p-toggleswitch-handle {
+  background: linear-gradient(145deg, #9baab2, #d2dee4) !important
+}
+
+.p-toggleswitch-checked .p-toggleswitch-handle {
+  background: linear-gradient(145deg, #7ce7f4, #9ce6bf) !important
+}
+
+app-analytics .analytics-hero,
+app-analytics .analytics-hero .p-card-body,
+app-analytics .analytics-hero .p-card-content {
+  min-width: 0;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 0;
+  max-height: none;
+  box-sizing: border-box
+}
+
+app-analytics .analytics-hero .p-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden
+}
+
+app-analytics .analytics-hero app-telemetry-canvas {
+  flex: 0 0 auto;
+  height: auto;
+  min-height: 0;
+  max-width: 100%
+}
+
+
+app-alarms {
+  --alarm-info: #39c8ee;
+  --alarm-warning: #f2af55;
+  --alarm-critical: #fb707d;
+  --p-paginator-background: var(--panel-bg-solid);
+  --p-paginator-color: var(--muted-strong);
+  --p-paginator-nav-button-background: transparent;
+  --p-paginator-nav-button-color: var(--muted-strong);
+  --p-paginator-nav-button-hover-background: var(--surface-hover);
+  --p-paginator-nav-button-hover-color: var(--text-strong);
+  --p-paginator-nav-button-selected-background: var(--accent-soft-strong);
+  --p-paginator-nav-button-selected-color: var(--accent-text);
+}
+
+html[data-theme='light'] app-alarms {
+  --alarm-info: #087ea3;
+  --alarm-warning: #ab6c19;
+  --alarm-critical: #c24351;
+}
+
+app-alarms p-card {
+  display: block;
+  min-width: 0
+}
+
+app-alarms .alarm-prime-card.p-card {
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  background: var(--panel-bg-solid) !important;
+  box-shadow: var(--shadow);
+}
+
+app-alarms .alarm-prime-card .p-card-body,
+app-alarms .alarm-prime-card .p-card-content {
+  padding: 0 !important;
+  min-width: 0 !important;
+}
+
+app-alarms .alarms-prime-table.p-datatable {
+  overflow: hidden !important;
+  max-width: 100%;
+  background: var(--panel-bg-solid) !important;
+  color: var(--text) !important;
+}
+
+app-alarms .alarms-prime-table .p-datatable-table-container {
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--panel-bg-solid) !important;
+}
+
+app-alarms .alarms-prime-table .p-datatable-table {
+  border-spacing: 0;
+  min-width: 580px;
+}
+
+app-alarms .alarms-prime-table .p-datatable-thead>tr>th {
+  background: var(--surface-elevated) !important;
+  color: var(--muted-strong) !important;
+  padding: 15px 17px !important;
+  font-size: 11px !important;
+  font-weight: 800;
+  border: 0 !important;
+  border-bottom: 1px solid var(--line-strong) !important;
+  text-align: start;
+}
+
+app-alarms .alarms-prime-table .p-datatable-tbody>tr>td {
+  padding: 13px 17px !important;
+  vertical-align: middle !important;
+  background: var(--panel-bg-solid) !important;
+  color: var(--text) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--line) !important;
+  line-height: 1.65;
+  font-size: 11px !important;
+  transition: background .18s ease;
+}
+
+app-alarms .alarms-prime-table .p-datatable-tbody>tr:nth-child(even)>td {
+  background: color-mix(in srgb, var(--surface-elevated) 32%, var(--panel-bg-solid)) !important;
+}
+
+app-alarms .alarms-prime-table .p-datatable-tbody>tr:hover>td {
+  background: color-mix(in srgb, var(--cyan) 5%, var(--panel-bg-solid)) !important;
+}
+
+app-alarms .alarms-prime-table .p-datatable-tbody>tr:last-child>td {
+  border-bottom: 0 !important;
+}
+
+app-alarms .alarm-event strong {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-strong);
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+app-alarms .alarms-prime-table .alarm-detail {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px !important;
+  line-height: 1.75;
+  color: var(--muted-strong) !important;
+  max-width: 480px;
+  overflow-wrap: anywhere;
+}
+
+app-alarms .alarm-time {
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+  color: var(--muted-strong);
+  font-size: 10px;
+}
+
+app-alarms .severity-badge {
+  --severity-color: var(--alarm-info);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 30px;
+  min-width: 70px;
+  max-width: 100%;
+  padding: 5px 11px;
+  border: 1px solid color-mix(in srgb, var(--severity-color) 32%, transparent);
+  border-radius: 9px;
+  color: var(--severity-color);
+  background: color-mix(in srgb, var(--severity-color) 9%, var(--panel-bg-solid));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .018);
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 850;
+  white-space: nowrap;
+  position: relative;
+  isolation: isolate;
+}
+
+app-alarms .severity-badge[data-level='warning'] {
+  --severity-color: var(--alarm-warning);
+}
+
+app-alarms .severity-badge[data-level='critical'] {
+  --severity-color: var(--alarm-critical);
+}
+
+app-alarms .severity-beacon {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--severity-color) 36%, transparent);
+}
+
+app-alarms .severity-beacon::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+app-alarms .severity-badge[data-level='info']:not(.acknowledged) .severity-beacon::after {
+  animation: alarmInfoPulse 2.8s ease-in-out infinite;
+}
+
+app-alarms .severity-badge[data-level='warning']:not(.acknowledged) .severity-beacon::after {
+  animation: alarmWarnPulse 1.7s ease-out infinite;
+}
+
+app-alarms .severity-badge[data-level='critical']:not(.acknowledged) .severity-beacon::after {
+  animation: alarmCriticalPulse 1.05s ease-out infinite;
+}
+
+app-alarms .severity-badge.acknowledged {
+  opacity: .68;
+}
+
+@keyframes alarmInfoPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: .25
+  }
+
+  50% {
+    transform: scale(1.7);
+    opacity: .75
+  }
+}
+
+@keyframes alarmWarnPulse {
+  0% {
+    transform: scale(.9);
+    opacity: .7
+  }
+
+  70%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0
+  }
+}
+
+@keyframes alarmCriticalPulse {
+  0% {
+    transform: scale(1);
+    opacity: .95
+  }
+
+  65%,
+  100% {
+    transform: scale(2.7);
+    opacity: 0
+  }
+}
+
+app-alarms .ack-button .p-button {
+  min-height: 32px;
+  min-width: 75px;
+  padding: 6px 10px !important;
+  border-radius: 9px !important;
+  background: color-mix(in srgb, var(--cyan) 5%, var(--panel-bg-solid)) !important;
+  color: var(--accent-text) !important;
+  border: 1px solid var(--accent-border) !important;
+  box-shadow: none !important;
+  font-weight: 800;
+}
+
+app-alarms .ack-button .p-button:not(:disabled):hover {
+  background: var(--accent-soft-strong) !important;
+  border-color: var(--cyan) !important;
+}
+
+app-alarms .ack-button .p-button:disabled {
+  opacity: .66 !important;
+  color: var(--muted-strong) !important;
+  background: var(--surface-soft) !important;
+  border-color: var(--line) !important;
+}
+
+app-alarms .alarms-prime-table .p-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 62px;
+  padding: 11px 14px !important;
+  color: var(--muted-strong) !important;
+  background: var(--panel-bg-solid) !important;
+  border: 0 !important;
+  border-top: 1px solid var(--line-strong) !important;
+  border-radius: 0 0 14px 14px !important;
+}
+
+app-alarms .alarms-prime-table .p-paginator .p-paginator-page,
+app-alarms .alarms-prime-table .p-paginator .p-paginator-first,
+app-alarms .alarms-prime-table .p-paginator .p-paginator-last,
+app-alarms .alarms-prime-table .p-paginator .p-paginator-prev,
+app-alarms .alarms-prime-table .p-paginator .p-paginator-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 35px;
+  min-height: 35px;
+  padding: 4px 8px;
+  color: var(--muted-strong) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  font-size: 11px !important;
+  font-family: inherit !important;
+  transition: background .18s, border-color .18s, color .18s;
+}
+
+app-alarms .alarms-prime-table .p-paginator :is(.p-paginator-page, .p-paginator-first, .p-paginator-last, .p-paginator-prev, .p-paginator-next):not(:disabled):hover {
+  color: var(--text-strong) !important;
+  background: var(--surface-hover) !important;
+  border-color: var(--line) !important;
+}
+
+app-alarms .alarms-prime-table .p-paginator .p-paginator-page.p-paginator-page-selected,
+app-alarms .alarms-prime-table .p-paginator .p-paginator-page.p-highlight,
+app-alarms .alarms-prime-table .p-paginator .p-paginator-page[aria-current='page'] {
+  color: var(--accent-text) !important;
+  background: var(--accent-soft-strong) !important;
+  border-color: var(--accent-border) !important;
+}
+
+app-alarms .alarms-prime-table .p-paginator button:disabled {
+  opacity: .36 !important;
+  cursor: not-allowed;
+}
+
+app-alarms .alarms-prime-table .p-paginator .p-select,
+app-alarms .alarms-prime-table .p-paginator .p-paginator-rpp-dropdown,
+app-alarms .alarms-prime-table .p-paginator select {
+  min-width: 75px;
+  min-height: 36px;
+  color: var(--text) !important;
+  background: var(--surface-input) !important;
+  border: 1px solid var(--line-strong) !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+}
+
+app-alarms .alarms-prime-table .p-paginator :is(.p-select-label, .p-select-dropdown, .p-select-dropdown-icon) {
+  color: var(--muted-strong) !important;
+  background: transparent !important;
+  font-family: inherit !important;
+}
+
+app-alarms .alarms-prime-table .p-paginator .p-paginator-current {
+  color: var(--muted-strong) !important;
+}
+
+html[data-theme='dark'] .p-select-overlay,
+html[data-theme='dark'] .p-select-list-container,
+html[data-theme='dark'] .p-select-list {
+  background: var(--surface-elevated) !important;
+  color: var(--text) !important;
+  border-color: var(--line-strong) !important;
+}
+
+html[data-theme='dark'] .p-select-option {
+  color: var(--text) !important;
+  background: transparent !important;
+}
+
+html[data-theme='dark'] .p-select-option:not(.p-select-option-selected):hover,
+html[data-theme='dark'] .p-select-option.p-focus {
+  background: var(--surface-hover) !important;
+}
+
+html[data-theme='dark'] .p-select-option.p-select-option-selected {
+  background: var(--accent-soft-strong) !important;
+  color: var(--accent-text) !important;
+}
+
+html[dir='rtl'] app-alarms :is(.severity-badge, .p-paginator, .p-select, .p-select-option, .alarm-time) {
+  font-family: 'Vazir', Tahoma, Arial, sans-serif !important;
+}
+
+@media(max-width:700px) {
+
+  app-alarms .alarms-prime-table .p-datatable-thead>tr>th,
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr>td {
+    padding: 12px 10px !important;
+    font-size: 10px !important
+  }
+
+  app-alarms .alarms-prime-table .p-paginator {
+    padding: 9px 6px !important;
+    gap: 2px;
+    min-height: 56px
+  }
+
+  app-alarms .alarms-prime-table .p-paginator :is(.p-paginator-page, .p-paginator-first, .p-paginator-last, .p-paginator-prev, .p-paginator-next) {
+    min-width: 29px;
+    min-height: 32px;
+    padding: 4px !important
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  app-alarms .severity-beacon::after {
+    animation: none !important;
+  }
+}
+
+@media(max-width:640px) {
+  app-alarms .alarms-prime-table .p-datatable-table-container {
+    overflow-x: hidden !important;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-table {
+    min-width: 0 !important;
+    width: 100% !important;
+    table-layout: auto !important;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-thead {
+    display: none !important;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody {
+    display: block !important;
+    padding: 10px;
+    background: var(--panel-bg-solid) !important;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr.alarm-entry {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'level action' 'event event' 'time time';
+    gap: 8px 10px;
+    align-items: center;
+    margin: 0 0 9px;
+    padding: 12px !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 11px !important;
+    background: var(--surface-soft) !important;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr.alarm-entry:last-child {
+    margin-bottom: 0;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr.alarm-entry>td {
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    min-width: 0 !important;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr.alarm-entry>td:nth-child(1) {
+    grid-area: level;
+    justify-self: start;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr.alarm-entry>td:nth-child(2) {
+    grid-area: event;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr.alarm-entry>td:nth-child(3) {
+    grid-area: time;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr.alarm-entry>td:nth-child(4) {
+    grid-area: action;
+    justify-self: end;
+  }
+
+  app-alarms .alarm-event strong {
+    font-size: 12px !important;
+  }
+
+  app-alarms .alarms-prime-table .alarm-detail {
+    font-size: 10px !important;
+  }
+
+  app-alarms .severity-badge {
+    min-height: 28px;
+  }
+
+  app-alarms .alarms-prime-table .p-datatable-tbody>tr:not(.alarm-entry)>td {
+    white-space: normal;
+  }
+
+  app-alarms .alarms-prime-table .p-paginator {
+    border-radius: 0 0 14px 14px !important;
+  }
+}

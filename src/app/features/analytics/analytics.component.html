@@ -1,0 +1,27 @@
+<section class="page-head">
+  <div><span class="eyebrow">{{ i18n.t('analytics.eyebrow') }}</span>
+    <h2>{{ i18n.t('analytics.title') }}</h2>
+    <p>{{ i18n.t('analytics.subtitle') }}</p>
+  </div>
+</section>
+<div class="analytics-grid">
+  <p-card styleClass="analytics-hero">
+    <div class="panel-head">
+      <div><span class="eyebrow">{{ i18n.t('analytics.trend') }}</span>
+        <h3>{{ i18n.t('analytics.correlation') }}</h3>
+      </div><p-tag [value]="i18n.t('trend.interactive')" severity="info" />
+    </div><app-telemetry-canvas [fixedHeight]="true" [telemetry]="pump.telemetry()" />
+  </p-card>
+  <p-card styleClass="analytics-kpi"><span>{{ i18n.t('analytics.specificEnergy') }}</span><strong>{{ specificEnergy() |
+      number:'1.2-2' }}<small> kWh/m³</small></strong>
+    <p>{{ i18n.t('analytics.specificEnergyText') }}</p>
+  </p-card>
+  <p-card styleClass="analytics-kpi"><span>{{ i18n.t('analytics.hydraulicLoad') }}</span><strong>{{ hydraulicLoad() |
+      number:'1.0-0' }}<small> %</small></strong>
+    <p>{{ i18n.t('analytics.hydraulicLoadText') }}</p>
+  </p-card>
+  <p-card styleClass="analytics-kpi"><span>{{ i18n.t('analytics.dailyRuntime') }}</span><strong>07:42<small>
+        h</small></strong>
+    <p>{{ i18n.t('analytics.dailyRuntimeText') }}</p>
+  </p-card>
+</div>
